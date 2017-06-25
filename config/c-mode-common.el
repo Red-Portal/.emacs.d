@@ -3,6 +3,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; packages used over c, c++, obj-c, common c modes
 
+
 (use-package cmake-mode
   :mode ("CMakeLists.txt'" . cmake-mode))
 
@@ -47,8 +48,9 @@
   (add-hook 'c-mode-common-hook #'c++-mode-rtags-hook))
 
 
-(use-package cmake-ide)
-(cmake-ide-setup)
+(use-package cmake-ide
+  :config
+  (cmake-ide-setup))
 
 (use-package irony-mode
   :init
