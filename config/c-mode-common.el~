@@ -6,14 +6,14 @@
 (use-package cmake-mode
   :mode ("CMakeLists.txt'" . cmake-mode))
 
-;(use-package electric-spacing
-;  :init
-;  (add-hook 'c-mode-common-hook #'electric-spacing-mode))
+(use-package electric-spacing
+  :init
+  (add-hook 'c-mode-common-hook #'electric-spacing-mode))
 
 (add-hook 'c-mode-common-hook #'electric-pair-mode)
 
 
-(add-hook 'c-mode-common-hook
+(add-hook 'c++-mode-hook
 	  '(setq-default tab-width 4
 			 indent-tabs-mode nil
 			 indent-level 4)
@@ -28,11 +28,6 @@
   (setq rtags-autostart-diagnostics t)
   (rtags-diagnostics))
 
-;;
-(use-package ivy-rtags
-  :config
-  (setq rtags-display-result-backend 'ivy))
-
 
 ;; flycheck rtags integration
 (use-package flycheck-rtags
@@ -40,9 +35,9 @@
   :config
   (defun c++-mode-rtags-hook ()
     (interactive)
-    (flycheck-select-checker 'rtags))
-    ;(setq-local flycheck-highlighting-mode nil)
-    ;(setq-local flycheck-check-syntax-automatically nil))
+    (flycheck-select-checker 'rtags)
+    (setq-local flycheck-highlighting-mode nil)
+    (setq-local flycheck-check-syntax-automatically nil))
   (add-hook 'c-mode-common-hook #'c++-mode-rtags-hook))
 
 
@@ -59,7 +54,6 @@
   (add-hook 'c-mode-common-hook
 	    (lambda ()
 	      (add-to-list 'company-backends 'company-irony))))
-
 (use-package company-irony-c-headers
   :init
   (add-hook 'c-mode-common-hook
