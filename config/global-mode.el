@@ -59,15 +59,26 @@
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 
 
-                                        ;smex command key-bindings
+;;smex command key-bindings
+; using smex-ivy for the actual M-x stuff
 (use-package smex
   :config
   (smex-initialize))
-                                        ;(global-set-key (kbd "M-x") 'smex)
-                                        ;(global-set-key (kbd "M-X") 'smex-major-commands)
-                                        ;(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
-
 
 ;;windMove (moving between windows using shift+arrows)
 (when (fboundp 'windmove-default-keybindings)
   (windmove-default-keybindings))
+
+;; aggressive-indent-mode
+(use-package aggressive-indent
+  :init
+  ;; (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
+  ;; (add-hook 'c-mode-common-hook #'aggressive-indent-mode)
+  :config
+  ;; currently experimentally using global mode enabled
+  (global-aggressive-indent-mode 1))
+
+;; magit setup
+(use-package magit
+  :bind
+  ("C-x g" . magit-status))
