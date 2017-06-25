@@ -84,3 +84,6 @@
   ("C-x g" . magit-status))
 
 (use-package evil-magit)
+
+
+;; example commit
