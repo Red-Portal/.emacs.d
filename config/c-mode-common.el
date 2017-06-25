@@ -5,22 +5,25 @@
 
 
 (use-package cmake-mode
-  :mode ("CMakeLists.txt'" . cmake-mode))
+  :mode ("CMakeLists.txt'" . cmake-mode)
+  :init
+  (setq cmake-tab-width 4))
 
-;(use-package electric-spacing
-;  :init
-;  (add-hook 'c-mode-common-hook #'electric-spacing-mode))
+
+;;(use-package electric-spacing
+;; :init
+;; (add-hook 'c-mode-common-hook #'electric-spacing-mode))
 
 (add-hook 'c-mode-common-hook #'electric-pair-mode)
 
-
 (add-hook 'c-mode-common-hook
-          '(lambda ()
-             (setq c-default-style "bsd"
+	  '(lambda ()
+	     (setq c-default-style "bsd"
 		   tab-width 4
-		   indent-tabs-mode nil 
+		   indent-tabs-mode nil
 		   indent-level 4
 		   c-basic-offset 4)))
+
 
 (use-package rtags
   :if (not (eq system-type 'ms-dos))
@@ -43,8 +46,8 @@
   (defun c++-mode-rtags-hook ()
     (interactive)
     (flycheck-select-checker 'rtags))
-    ;(setq-local flycheck-highlighting-mode nil)
-    ;(setq-local flycheck-check-syntax-automatically nil))
+  ;;(setq-local flycheck-highlighting-mode nil)
+  ;;(setq-local flycheck-check-syntax-automatically nil))
   (add-hook 'c-mode-common-hook #'c++-mode-rtags-hook))
 
 
