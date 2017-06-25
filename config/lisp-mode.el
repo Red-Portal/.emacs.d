@@ -1,3 +1,7 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;; lisp mode ;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (use-package smartparens
   :init
   (add-hook 'elisp-mode-hook #'smartparens-mode)

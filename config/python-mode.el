@@ -1,3 +1,7 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;; python mode ;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (add-to-list 'auto-mode-alist '("\\.pyl\\'" . python-mode))
 
 ;; external dependencies
