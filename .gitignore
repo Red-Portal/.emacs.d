@@ -1,0 +1,11 @@
+elpa
+semanticdb
+*.data
+*~
+url
+auto-save-list
+srecode-map.el
+smex-items
+bookmarks
+url
+irony
