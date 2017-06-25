@@ -66,3 +66,11 @@
 	    (lambda()
 	      (add-to-list 'company-backends
 			   'company-irony-c-headers))))
+
+(use-package function-args
+  :init
+  (add-hook 'c++-mode-hook 'function-args-mode)
+  (add-hook 'c-mode-hook 'function-args-mode)
+  :config
+  (fa-config-default)
+  (set-default 'semantic-case-fold t))
