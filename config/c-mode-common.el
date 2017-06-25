@@ -14,11 +14,12 @@
 
 
 (add-hook 'c-mode-common-hook
-	  '(setq-default tab-width 4
-			 indent-tabs-mode nil
-			 indent-level 4)
-	  '(setq c-default-style "bsd"
-		 c-basic-offset 4))
+          '(lambda ()
+             (setq c-default-style "bsd"
+		   tab-width 4
+		   indent-tabs-mode nil 
+		   indent-level 4
+		   c-basic-offset 4)))
 
 (use-package rtags
   :if (not (eq system-type 'ms-dos))
