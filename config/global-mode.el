@@ -28,7 +28,23 @@
   :config
   (evil-mode 1))
 
-(load-theme 'spacemacs-dark)
+;; eye candy themes~~
+;; (load-theme 'spacemacs-dark)
+(use-package doom-themes
+  :config
+  (setq doom-themes-enable-bold t
+	doom-themes-enable-italic t)
+  (setq doom-one-brighter-comments t)
+  (load-theme 'doom-one t)
+  (doom-themes-visual-bell-config))
+
+(use-package solaire-mode
+  :init
+  (add-hook 'after-change-major-mode-hook #'turn-on-solaire-mode)
+  (add-hook 'minibuffer-setup-hook #'solaire-mode-in-minibuffer)
+  :config
+  (setq solaire-mode-remap-modeline nil))
+
 
 ;;flycheck configurations
 (use-package flycheck
