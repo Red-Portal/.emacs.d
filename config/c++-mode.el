@@ -18,5 +18,6 @@
 (add-to-list 'auto-mode-alist '("\\.inl\\'" . c++-mode))
 
 (use-package srefactor
+  :ensure t
   :config
   (semantic-mode 1))

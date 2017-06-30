@@ -1,0 +1,3 @@
+[submodule "github/ivy-smex"]
+	path = github/ivy-smex
+	url = https://github.com/purcell/ivy-smex.git

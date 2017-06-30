@@ -4,4 +4,5 @@
 
 (add-to-list 'auto-mode-alist '("\\.hs\\'" . haskell-mode))
 
-(use-package haskell-mode)
+(use-package haskell-mode
+  :ensure t)

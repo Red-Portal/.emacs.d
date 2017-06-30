@@ -2,4 +2,5 @@
 ;;;;;;;;;;; org-mode configurations ;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package ox-gfm)
+(use-package ox-gfm
+  :ensure t)

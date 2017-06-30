@@ -5,6 +5,15 @@
 
 ;; load custom packages
 
+;;smex command key-bindings
+; using smex-ivy for the actual M-x stuff
+(use-package smex
+  :ensure t
+  :config
+  (smex-initialize))
+
+
+;; ivy + smex
 (use-package ivy-smex
   :load-path "github/ivy-smex/"
   :bind ("M-x" . ivy-smex))
@@ -13,24 +22,26 @@
 
 ;; ivy settings
 (use-package ivy
+  :ensure t
   :config
   (ivy-mode 1))
-
-;; ivy + smex
 
 
 ;; global company config
 (use-package company
+  :ensure t
   :config
   (global-company-mode))
 
 (use-package evil
+  :ensure t
   :config
   (evil-mode 1))
 
 ;; eye candy themes~~
 ;; (load-theme 'spacemacs-dark)
 (use-package doom-themes
+  :ensure t
   :config
   (setq doom-themes-enable-bold t
 	doom-themes-enable-italic t)
@@ -39,6 +50,7 @@
   (doom-themes-visual-bell-config))
 
 (use-package solaire-mode
+  :ensure t
   :init
   (add-hook 'after-change-major-mode-hook #'turn-on-solaire-mode)
   (add-hook 'minibuffer-setup-hook #'solaire-mode-in-minibuffer)
@@ -48,6 +60,7 @@
 
 ;;flycheck configurations
 (use-package flycheck
+  :ensure t
   :config
   (global-flycheck-mode))
 ;;(add-hook 'c++-mode-hook
@@ -56,6 +69,7 @@
 
 ;; telephone line mode configurations
 (use-package telephone-line
+  :ensure t
   :config
   (telephone-line-mode 1)
   (setq telephone-line-lhs
@@ -75,18 +89,13 @@
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 
 
-;;smex command key-bindings
-; using smex-ivy for the actual M-x stuff
-(use-package smex
-  :config
-  (smex-initialize))
-
 ;;windMove (moving between windows using shift+arrows)
 (when (fboundp 'windmove-default-keybindings)
   (windmove-default-keybindings))
 
 ;; aggressive-indent-mode
 (use-package aggressive-indent
+  :ensure t
   :init
   ;; (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
   ;; (add-hook 'c-mode-common-hook #'aggressive-indent-mode)
@@ -96,10 +105,12 @@
 
 ;; magit setup
 (use-package magit
+  :ensure t
   :bind
   ("C-x g" . magit-status))
 
-(use-package evil-magit)
+(use-package evil-magit
+  :ensure t)
 
 
 ;; example commit

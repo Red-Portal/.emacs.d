@@ -3,6 +3,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package smartparens
+  :ensure t
   :init
   (add-hook 'elisp-mode-hook #'smartparens-mode)
   (add-hook 'lisp-mode-hook #'smartparens-mode)
