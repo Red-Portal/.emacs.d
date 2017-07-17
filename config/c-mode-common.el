@@ -4,6 +4,13 @@
 ;; packages used over c, c++, obj-c, common c modes
 
 
+(defvar setup-mode nil)
+
+(if (member "-setup" 'argv)
+    (progn (setq setup-mode t)
+	   (message "emacs is in package setup mode."))
+  nil)
+
 (use-package cmake-mode
   :ensure t
   :mode ("CMakeLists.txt'" . cmake-mode)
@@ -26,12 +33,18 @@
 		   indent-level 4
 		   c-basic-offset 4)))
 
+(setq tab-width 4
+      indent-tabs-mode nil
+      indent-level 4
+      c-basic-offset 4)
 
 (use-package rtags
   :if (not (eq system-type 'ms-dos))
   :ensure t
   :config
-  (setq rtags-path "~/.emacs.d/elpa/rtags-20170527.450/rtags-2.10/bin/")
+  (if setup-mode
+      (rtags-install) nil)
+  (setq rtags-path "~/.emacs.d/elpa/rtags-20170714.1944/rtags-2.11/bin/")
   (add-hook 'c-mode-common-hook 'rtags-start-process-unless-running)
   (setq rtags-autostart-diagnostics t)
   (rtags-diagnostics))
@@ -61,10 +74,12 @@
   :config
   (cmake-ide-setup))
 
-;;(use-package irony-mode
-;;  :init
-;;  (add-hook 'c-mode-common-hook 'irony-mode)
-;;  (add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
+(use-package irony
+  :ensure t
+  :init
+  (if setup-mode
+      (irony-install-server) nil)
+  (add-hook 'c-mode-common-hook 'irony-mode))
 
 (use-package company-irony
   :ensure t

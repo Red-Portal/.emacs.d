@@ -112,5 +112,11 @@
 (use-package evil-magit
   :ensure t)
 
+;; highlight symbol
+(use-package highlight-symbol
+  :ensure t
+  :config
+  (highlight-symbol-mode)
+  (setq highlight-symbol-idle-delay 0))
 
-;; example commit
+

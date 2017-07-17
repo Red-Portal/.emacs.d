@@ -5,3 +5,6 @@
 	("\\.md\\'" . markdown-mode)
 	("\\.markdown\\'" . markdwon-mode))
   :init(setq markdown-command "multimarkdown"))
+
+(use-package ox-gfm
+  :ensure t)
