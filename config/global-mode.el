@@ -119,4 +119,4 @@
   (highlight-symbol-mode)
   (setq highlight-symbol-idle-delay 0))
 
-
+(global-hl-line-mode t)
