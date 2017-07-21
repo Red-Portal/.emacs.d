@@ -85,10 +85,6 @@
   (telephone-line-mode t))
 
 
-;; rainbow delimiters
-(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
-
-
 ;;windMove (moving between windows using shift+arrows)
 (when (fboundp 'windmove-default-keybindings)
   (windmove-default-keybindings))
