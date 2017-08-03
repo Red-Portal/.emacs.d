@@ -47,6 +47,7 @@
   (setq rtags-path "~/.emacs.d/elpa/rtags-20170714.1944/rtags-2.11/bin/")
   (add-hook 'c-mode-common-hook 'rtags-start-process-unless-running)
   (setq rtags-autostart-diagnostics t)
+  (setq rtags-completions-enabled t)
   (rtags-diagnostics))
 
 ;;
@@ -68,33 +69,37 @@
   ;;(setq-local flycheck-check-syntax-automatically nil))
   (add-hook 'c-mode-common-hook #'c++-mode-rtags-hook))
 
-
 (use-package cmake-ide
   :ensure t
   :config
   (cmake-ide-setup))
 
-(use-package irony
-  :ensure t
-  :init
-  (if setup-mode
-      (irony-install-server) nil)
-  (add-hook 'c-mode-common-hook 'irony-mode))
+;; (use-package irony
+;;   :ensure t
+;;   :init
+;;   (if setup-mode
+;;       (irony-install-server) nil)
+;;   (add-hook 'c-mode-common-hook 'irony-mode))
 
-(use-package company-irony
-  :ensure t
-  :init
-  (add-hook 'c-mode-common-hook
-	    (lambda ()
-	      (add-to-list 'company-backends 'company-irony))))
+;; (use-package company-irony
+;;   :ensure t
+;;   :init
+;;   (add-hook 'c-mode-common-hook
+;; 	    (lambda ()
+;; 	      (add-to-list 'company-backends 'company-irony))))
 
-(use-package company-irony-c-headers
+(use-package company-rtags
   :ensure t
-  :init
-  (add-hook 'c-mode-common-hook
-	    (lambda()
-	      (add-to-list 'company-backends
-			   'company-irony-c-headers))))
+  :config
+  (push 'company-rtags company-backends))
+
+;; (use-package company-irony-c-headers
+;;   :ensure t
+;;   :init
+;;   (add-hook 'c-mode-common-hook
+;; 	    (lambda()
+;; 	      (add-to-list 'company-backends
+;; 			   'company-irony-c-headers))))
 
 ;;(use-package function-args
 ;;  :init
