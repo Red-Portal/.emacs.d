@@ -1,0 +1,48 @@
+* Red-Portal's Emacs init.el
+  Red-Portal's persomal emacs configurations. Free, open to everyone.
+  
+** Install
+   #+begin_src shell
+git clone --recursive https://github.com/Red-Portal/.emacs.d ~/
+cd ~/.emacs.d
+emacs -setup
+   #+end_src 
+   
+   Certain emacs packages are supposed to run a initial command at first startup.
+   This is why ~-setup~ should be run an first startup.
+   
+   By the help of ~use-package~ most packages should be automatically installed.
+   Naturally, internet connection is required at first startup.
+   
+** Supported Platforms
+   Tested only on emacs25.
+   All platforms supporting emacs25 are supported
+
+   The most important package for C++ which is ~[[https://github.com/Andersbakken/rtags][rtags]]~ is not yet supported on Windows.
+   Thus ~rtags~ is disabled on Windows by default.
+   I suggest ~[[https://github.com/Sarcasm/irony-mode][irony]]~ as an alternative to rtags for Windows.
+
+** Used Packages
++ use-package
++ cmake-mode 
++ markdown-mode
++ cuda-mode
++ haskell-mode
++ company
++ magit
++ flycheck
++ rtags
++ cmake-ide
++ jedi
++ evil
++ ivy
++ smex
++ smex-ivy
++ doom-themes
++ telephone-line
++ ox-gfm
++ smartparens
++ aggressive-indent
++ reainbow-delimiters
++ electric-pair-mode
++ smartparens
