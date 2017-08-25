@@ -41,6 +41,8 @@
 (use-package rtags
   :if (not (eq system-type 'ms-dos))
   :ensure t
+  :bind
+  ("C-;" . company-rtags)
   :config
   (if setup-mode
       (rtags-install) nil)
