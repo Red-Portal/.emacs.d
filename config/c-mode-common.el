@@ -3,13 +3,14 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; packages used over c, c++, obj-c, common c modes
 
+;; (defvar setup-mode nil)
 
-(defvar setup-mode nil)
+;; (if (member "-setup" 'argv)
+;;     (progn (setq setup-mode t)
+;; 	   (message "emacs is in package setup mode."))
+;;   nil)
 
-(if (member "-setup" 'argv)
-    (progn (setq setup-mode t)
-	   (message "emacs is in package setup mode."))
-  nil)
+(check-if-setup-mode)
 
 (use-package cmake-mode
   :ensure t
@@ -76,32 +77,36 @@
   :config
   (cmake-ide-setup))
 
-;; (use-package irony
-;;   :ensure t
-;;   :init
-;;   (if setup-mode
-;;       (irony-install-server) nil)
-;;   (add-hook 'c-mode-common-hook 'irony-mode))
+(use-package irony
+  :if (eq system-type 'ms-dos)
+  :ensure t
+  :init
+  (if setup-mode
+      (irony-install-server) nil)
+  (add-hook 'c-mode-common-hook 'irony-mode))
 
-;; (use-package company-irony
-;;   :ensure t
-;;   :init
-;;   (add-hook 'c-mode-common-hook
-;; 	    (lambda ()
-;; 	      (add-to-list 'company-backends 'company-irony))))
+(use-package company-irony
+  :if (eq system-type 'ms-dos)
+  :ensure t
+  :init
+  (add-hook 'c-mode-common-hook
+	    (lambda ()
+	      (add-to-list 'company-backends 'company-irony))))
 
 (use-package company-rtags
+  :if (not (eq system-type 'ms-dos))
   :ensure t
   :config
   (push 'company-rtags company-backends))
 
-;; (use-package company-irony-c-headers
-;;   :ensure t
-;;   :init
-;;   (add-hook 'c-mode-common-hook
-;; 	    (lambda()
-;; 	      (add-to-list 'company-backends
-;; 			   'company-irony-c-headers))))
+(use-package company-irony-c-headers
+  :if (eq system-type 'ms-dos)
+  :ensure t
+  :init
+  (add-hook 'c-mode-common-hook
+	    (lambda()
+	      (add-to-list 'company-backends
+			   'company-irony-c-headers))))
 
 ;;(use-package function-args
 ;;  :init

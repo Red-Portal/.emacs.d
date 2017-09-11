@@ -1,21 +1,9 @@
-
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
 
-
 (message '"pass -setup as emacs argument in order to setup.")
-
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-
-(defvar setup-mode nil)
-(if (member "-setup" 'argv)
-    (progn (setq setup-mode t)
-	   (message "emacs starting as package setup mode."))
-  nil)
 
 (package-initialize)
 (add-to-list 'package-archives '("melpa stable" . "https://stable.melpa.org/packages/"))
@@ -24,10 +12,30 @@
 (add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 
+(defvar setup-mode nil)
+
+;; (defun start-setup-mode (switch)
+;;   "Start Emacs as package setup mode."
+;;   (progn (setq setup-mode t)
+;; 	 (message "emacs starting as package setup mode")))
+;; (add-to-list 'command-switch-alist '("-setup" . start-setup-mode))
+
+(defun check-if-setup-mode()
+  (if (member "-setup" command-line-args)
+      (progn (setq setup-mode t)
+	     (delete "-setup" command-line-args)
+	     (message "emacs starting as package setup mode."))
+    nil))
+
+(check-if-setup-mode)
+
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package)
+  (setq setup-mode t))
+
 (if setup-mode
     (package-refresh-contents) nil)
-
-(require 'use-package)
 
 (load-file "~/.emacs.d/config/global-mode.el")
 (load-file "~/.emacs.d/config/c-mode-common.el")
