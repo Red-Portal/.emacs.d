@@ -7,6 +7,10 @@
 
 (message '"pass -setup as emacs argument in order to setup.")
 
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
 (defvar setup-mode nil)
 (if (member "-setup" 'argv)
     (progn (setq setup-mode t)
