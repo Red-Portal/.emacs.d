@@ -10,6 +10,7 @@
 ;; 	   (message "emacs is in package setup mode."))
 ;;   nil)
 
+(defvar setup-mode nil)
 (check-if-setup-mode)
 
 (use-package cmake-mode
