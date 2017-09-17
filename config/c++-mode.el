@@ -16,6 +16,7 @@
 (add-to-list 'auto-mode-alist '("\\.h++\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.txx\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.tpp\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.ipp\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.inl\\'" . c++-mode))
 
 (use-package srefactor
