@@ -83,7 +83,7 @@
   :ensure t
   :init
   (if setup-mode
-      (irony-install-server) nil)
+      (irony-install-server t) nil)
   (add-hook 'c-mode-common-hook 'irony-mode))
 
 (use-package company-irony
@@ -98,7 +98,9 @@
   :if (not (eq system-type 'ms-dos))
   :ensure t
   :config
-  (push 'company-rtags company-backends))
+  (add-hook 'c-mode-common-hook
+	    (lambda ()
+	      (add-to-list 'company-backends 'company-rtags))))
 
 (use-package company-irony-c-headers
   :if (eq system-type 'ms-dos)
