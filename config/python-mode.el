@@ -4,6 +4,8 @@
 
 (add-to-list 'auto-mode-alist '("\\.pyl\\'" . python-mode))
 
+(setq python-indent-offset 4)
+
 ;; external dependencies
 ;;   - jedi
 ;;   - virtualenv
@@ -11,6 +13,6 @@
   :ensure t
   :init
   (add-hook 'python-mode-hook
-	    '(add-to-list 'company-backends 'company-jedi)
-	    '(jedi:setup)))
+	    (lambda ()
+	      (add-to-list 'company-backends 'company-jedi))))
 
