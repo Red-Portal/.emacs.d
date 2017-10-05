@@ -5,6 +5,8 @@ semanticdb
 url
 auto-save-list
 srecode-map.el
+network-security.data
+.python-environments
 smex-items
 bookmarks
 url

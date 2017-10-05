@@ -1,12 +1,11 @@
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; global-mode.el
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; packages used globally
 
-;; load custom packages
+;; Red-Portal/.emacs.d  Copyright (C) 2017 Red-Portal 
+;; This program comes with ABSOLUTELY NO WARRANTY.
+;; This is free software, and you are welcome to redistribute it
+;; under certain conditions.
 
 ;;smex command key-bindings
-; using smex-ivy for the actual M-x stuff
+;; using smex-ivy for the actual M-x stuff
 (use-package smex
   :ensure t
   :config

@@ -1,3 +1,9 @@
+
+;; Red-Portal/.emacs.d  Copyright (C) 2017 Red-Portal 
+;; This program comes with ABSOLUTELY NO WARRANTY.
+;; This is free software, and you are welcome to redistribute it
+;; under certain conditions.
+
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
