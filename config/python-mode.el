@@ -5,7 +5,7 @@
 (defvar setup-mode nil)
 (check-if-setup-mode)
 
-(add-to-list 'auto-mode-alist '("\\.pyl\\'" . python-mode))
+(add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
 
 (setq python-indent-offset 4)
 
@@ -18,6 +18,10 @@
   (add-hook 'python-mode-hook
 	    (lambda ()
 	      (add-to-list 'company-backends 'company-jedi)))
+  (add-hook 'python-mode-hook 'jedi-mode)
   :config
   (if setup-mode
       (jedi:install-server)))
+
+(use-package ein
+  :ensure t)
