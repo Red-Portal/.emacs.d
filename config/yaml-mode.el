@@ -1,3 +1,3 @@
 (use-package yaml-mode
   :ensure t
-  :mode(("\\.yml\\'" . yml-mode)))
+  :mode(("\\.yml\\'" . yaml-mode)))
