@@ -126,3 +126,17 @@
   (setq highlight-symbol-idle-delay 0))
 
 (global-hl-line-mode t)
+
+;; font settings
+(if (string-equal system-type "gnu/linux") ; linux
+    (if(member "Monaco" (font-family-list))
+	(progn
+	  (add-to-list 'initial-frame-alist '(font . "Monaco"))
+	  (add-to-list 'default-frame-alist '(font . "Monaco")))
+      (progn
+	(add-to-list 'initial-frame-alist
+		     '(font . "DejaVu Sans Mono-10"))
+	(add-to-list 'default-frame-alist
+		     '(font . "DejaVu Sans Mono-10")))))
+
+
