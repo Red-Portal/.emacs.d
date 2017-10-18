@@ -144,3 +144,10 @@
       scroll-conservatively 10000
       scroll-up-aggressively 0.5
       scroll-down-aggressively 0.5)
+
+(use-package highlight-indent-guides
+  :ensure t
+  :init
+  (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+  :config
+  (setq highlight-indent-guides-method 'character)) 
