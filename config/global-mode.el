@@ -156,4 +156,7 @@
   (setq highlight-indent-guides-method 'character)) 
 
 ;; matching parenthese highlight mode
-(show-paren-mode 1)
+(use-package highlight-parentheses
+  :ensure t
+  :config
+  (global-highlight-parentheses-mode))
