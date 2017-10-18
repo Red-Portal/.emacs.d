@@ -52,8 +52,15 @@
       indent-level 4
       c-basic-offset 4)
 
+;;
+(use-package ivy-rtags
+  :if (not (string-equal system-type "windows-nt"))
+  :ensure t
+  :config
+  (setq rtags-display-result-backend 'ivy))
+
 (use-package rtags
-  :if (not (eq system-type 'ms-dos))
+  :if (not (string-equal system-type "windows-nt"))
   :ensure t
   :bind
   ("C-;" . company-rtags)
@@ -66,16 +73,9 @@
   (setq rtags-completions-enabled t)
   (rtags-diagnostics))
 
-;;
-(use-package ivy-rtags
-  :ensure t
-  :config
-  (setq rtags-display-result-backend 'ivy))
-
-
 ;; flycheck rtags integration
 (use-package flycheck-rtags
-  :if (not (eq system-type 'ms-dos))
+  :if (not (string-equal system-type "windows-nt"))
   :ensure t
   :config
   (defun c++-mode-rtags-hook ()
@@ -91,7 +91,7 @@
   (cmake-ide-setup))
 
 (use-package irony
-  :if (eq system-type 'ms-dos)
+  :if (string-equal system-type "windows-nt")
   :ensure t
   :init
   (if setup-mode
@@ -99,7 +99,7 @@
   (add-hook 'c-mode-common-hook 'irony-mode))
 
 (use-package company-irony
-  :if (eq system-type 'ms-dos)
+  :if (string-equal system-type "windows-nt")
   :ensure t
   :init
   (add-hook 'c-mode-common-hook
@@ -107,7 +107,7 @@
 	      (add-to-list 'company-backends 'company-irony))))
 
 (use-package company-rtags
-  :if (not (eq system-type 'ms-dos))
+  :if (not (string-equal system-type "windows-nt"))
   :ensure t
   :config
   (add-hook 'c-mode-common-hook
@@ -115,7 +115,7 @@
 	      (add-to-list 'company-backends 'company-rtags))))
 
 (use-package company-irony-c-headers
-  :if (eq system-type 'ms-dos)
+  :if (string-equal system-type "windows-nt")
   :ensure t
   :init
   (add-hook 'c-mode-common-hook
