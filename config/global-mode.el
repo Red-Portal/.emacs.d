@@ -143,11 +143,17 @@
 (setq scroll-margin 1
       scroll-conservatively 10000
       scroll-up-aggressively 0.5
-      scroll-down-aggressively 0.5)
+      scroll-down-aggressively 0.5
+      mouse-wheel-scroll-amount '(3 ((shift). 1))
+      mouse-wheel-progressive-speed nil)
 
+;; indent guide mode
 (use-package highlight-indent-guides
   :ensure t
   :init
   (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
   :config
   (setq highlight-indent-guides-method 'character)) 
+
+;; matching parenthese highlight mode
+(show-paren-mode 1)
