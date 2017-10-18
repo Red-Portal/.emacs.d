@@ -139,4 +139,8 @@
 	(add-to-list 'default-frame-alist
 		     '(font . "DejaVu Sans Mono-10")))))
 
-
+;; emacs scroll setting
+(setq scroll-margin 1
+      scroll-conservatively 10000
+      scroll-up-aggressively 0.5
+      scroll-down-aggressively 0.5)
