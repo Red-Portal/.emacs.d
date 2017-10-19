@@ -41,14 +41,47 @@
 (use-package company
   :ensure t
   :config
-  (global-company-mode))
+  (global-company-mode)
+  (setq company-idle-delay 0))
 
-(use-package evil
+
+;; 80 column indicator bar
+(use-package fill-column-indicator
   :ensure t
   :config
-  (evil-mode 1))
+  (setq fci-rule-width 2)
+  (fci-mode))
 
-;; eye candy themes~~
+
+(defun forward-lines-fast()
+  "jump multiple lines forward"
+  (interactive)
+  (next-line 5))
+
+(defun backward-lines-fast()
+  "jump multiple lines forward"
+  (interactive)
+  (previous-line 5))
+
+;; evil mode config
+(use-package evil
+  :ensure t
+  :bind
+  (:map evil-normal-state-map
+	("J" . forward-lines-fast)
+	("K" . backward-lines-fast))
+  :config
+  (evil-mode 1)
+  ;; windmove evil-mode extension
+  (use-package windmove
+    :bind
+    (:map evil-normal-state-map
+	  ("C-h" . windmove-left)
+	  ("C-j" . windmove-down)
+	  ("C-k" . windmove-up)
+	  ("C-l" . windmove-right))))
+
+
 ;; (load-theme 'spacemacs-dark)
 (use-package doom-themes
   :ensure t
@@ -73,26 +106,14 @@
   :ensure t
   :config
   (global-flycheck-mode))
-;;(add-hook 'c++-mode-hook
-;;	  (lambda() (setq flycheck-clang-language-standard "c++14")))
 
 
-;; telephone line mode configurations
-(use-package telephone-line
+;; mode line mode configurations
+(use-package airline-themes
   :ensure t
   :config
-  (telephone-line-mode 1)
-  (setq telephone-line-lhs
-        '((evil   . (telephone-line-evil-tag-segment))
-          (accent . (telephone-line-vc-segment
-                     telephone-line-process-segment))
-          (nil    . (telephone-line-minor-mode-segment
-                     telephone-line-buffer-segment))))
-  (setq telephone-line-rhs
-        '((nil    . (telephone-line-misc-info-segment))
-          (accent . (telephone-line-major-mode-segment))
-          (evil   . (telephone-line-airline-position-segment))))
-  (telephone-line-mode t))
+  (load-theme 'airline-doom-molokai t)
+  (setq airline-shortened-directory-length 20))
 
 
 ;;windMove (moving between windows using shift+arrows)
@@ -124,7 +145,6 @@
   :config
   (highlight-symbol-mode)
   (setq highlight-symbol-idle-delay 0))
-
 (global-hl-line-mode t)
 
 ;; font settings
@@ -147,6 +167,10 @@
       mouse-wheel-scroll-amount '(3 ((shift). 1))
       mouse-wheel-progressive-speed nil)
 
+(use-package ivy-smex
+  :load-path "github/ivy-smex/"
+  :bind ("M-x" . ivy-smex))
+
 ;; indent guide mode
 (use-package highlight-indent-guides
   :ensure t
@@ -154,6 +178,9 @@
   (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
   :config
   (setq highlight-indent-guides-method 'character)) 
+
+;; truncate lines
+(set-default 'truncate-lines t)
 
 ;; matching parenthese highlight mode
 (use-package highlight-parentheses
