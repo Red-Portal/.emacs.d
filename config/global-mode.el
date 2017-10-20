@@ -42,7 +42,7 @@
   :ensure t
   :config
   (global-company-mode)
-  (setq company-idle-delay 0))
+  (setq company-idle-delay 0.3))
 
 
 ;; 80 column indicator bar
@@ -50,7 +50,7 @@
   :ensure t
   :config
   (setq fci-rule-width 2)
-  (fci-mode))
+  (add-hook 'prog-mode-hook 'fci-mode))
 
 
 (defun forward-lines-fast()
