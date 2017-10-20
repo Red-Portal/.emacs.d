@@ -113,6 +113,7 @@
   :ensure t
   :config
   (load-theme 'airline-doom-molokai t)
+  (setq powerline-height 33)
   (setq airline-shortened-directory-length 20))
 
 
