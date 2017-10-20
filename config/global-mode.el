@@ -181,9 +181,12 @@
 
 ;; truncate lines
 (set-default 'truncate-lines t)
+(add-hook 'compilation-mode-hook '(lambda ()(toggle-truncate-lines)))
+
 
 ;; matching parenthese highlight mode
 (use-package highlight-parentheses
   :ensure t
   :config
   (global-highlight-parentheses-mode))
+
