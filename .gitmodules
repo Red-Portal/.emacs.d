@@ -1,3 +1,6 @@
 [submodule "github/ivy-smex"]
 	path = github/ivy-smex
 	url = https://github.com/purcell/ivy-smex.git
+[submodule "org-mode"]
+	path = github/org-mode
+	url = git://orgmode.org/org-mode.git

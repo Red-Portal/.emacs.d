@@ -15,7 +15,13 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+(defvar setup-mode nil)
+(check-if-setup-mode)
+
 (use-package ox-gfm
   :ensure t
   :config
   (setq org-src-fontify-natively t))
+
+(use-package org-mode 
+  :load-path "github/org-mode/")
