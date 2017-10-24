@@ -16,4 +16,6 @@
 ;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 (use-package ox-gfm
-  :ensure t)
+  :ensure t
+  :config
+  (setq org-src-fontify-natively t))
