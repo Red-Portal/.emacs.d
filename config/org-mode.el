@@ -24,4 +24,4 @@
   (setq org-src-fontify-natively t))
 
 (use-package org-mode 
-  :load-path "github/org-mode/")
+  :load-path "github/org-mode/lisp")
