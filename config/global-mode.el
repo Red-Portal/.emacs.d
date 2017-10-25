@@ -46,11 +46,10 @@
 
 
 ;; 80 column indicator bar
-(use-package fill-column-indicator
-  :ensure t
-  :config
-  (setq fci-rule-width 2)
-  (add-hook 'prog-mode-hook 'fci-mode))
+;; (use-package fill-column-indicator
+;;   :ensure t
+;;   :config
+;;   (add-hook 'prog-mode-hook 'fci-mode))
 
 
 (defun forward-lines-fast()
@@ -189,5 +188,5 @@
 (use-package highlight-parentheses
   :ensure t
   :config
-  (global-highlight-parentheses-mode))
+  (add-hook 'lisp-mode-hook 'highlight-parentheses-mode))
 
