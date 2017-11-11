@@ -18,10 +18,10 @@
 (defvar setup-mode nil)
 (check-if-setup-mode)
 
-(use-package ox-gfm
-  :ensure t
-  :config
-  (setq org-src-fontify-natively t))
+(require 'ox)
 
-(use-package org-mode 
-  :load-path "github/org-mode/lisp")
+(eval-after-load "org"
+  (use-package ox-gfm
+    :ensure t
+    :config
+    (setq org-src-fontify-natively t)))

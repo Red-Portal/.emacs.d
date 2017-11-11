@@ -28,7 +28,9 @@
   :load-path "github/ivy-smex/"
   :bind ("M-x" . ivy-smex))
 
-(global-linum-mode t)
+;; line numbers
+(use-package nlinum-hl
+  :ensure t)
 
 ;; ivy settings
 (use-package ivy
@@ -148,11 +150,12 @@
 (global-hl-line-mode t)
 
 ;; font settings
+					; Monaco
 (if (string-equal system-type "gnu/linux") ; linux
-    (if(member "Monaco" (font-family-list))
+    (if(member "Consolas" (font-family-list))
 	(progn
-	  (add-to-list 'initial-frame-alist '(font . "Monaco"))
-	  (add-to-list 'default-frame-alist '(font . "Monaco")))
+	  (add-to-list 'initial-frame-alist '(font . "Consolas"))
+	  (add-to-list 'default-frame-alist '(font . "Consolas")))
       (progn
 	(add-to-list 'initial-frame-alist
 		     '(font . "DejaVu Sans Mono-10"))
