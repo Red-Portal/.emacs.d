@@ -30,7 +30,10 @@
 
 ;; line numbers
 (use-package nlinum-hl
-  :ensure t)
+  :ensure t
+  :config
+  (global-nlinum-mode t)
+  (setq nlinum-highlight-current-line t))
 
 ;; ivy settings
 (use-package ivy
@@ -114,8 +117,9 @@
   :ensure t
   :config
   (load-theme 'airline-doom-molokai t)
-  (setq powerline-height 33)
-  (setq airline-shortened-directory-length 20))
+  (setq powerline-height 33
+	airline-shortened-directory-length 20
+	powerline-default-separator nil))
 
 
 ;;windMove (moving between windows using shift+arrows)
@@ -150,11 +154,10 @@
 (global-hl-line-mode t)
 
 ;; font settings
-					; Monaco
-(if (string-equal system-type "gnu/linux") ; linux
+(if (string-equal system-type "gnu/linux") 
     (if(member "Consolas" (font-family-list))
 	(progn
-	  (add-to-list 'initial-frame-alist '(font . "Consolas"))
+	  (add-to-list 'initial-frame-alist '(font . "Consolas")); Monaco
 	  (add-to-list 'default-frame-alist '(font . "Consolas")))
       (progn
 	(add-to-list 'initial-frame-alist
@@ -175,12 +178,12 @@
   :bind ("M-x" . ivy-smex))
 
 ;; indent guide mode
-(use-package highlight-indent-guides
-  :ensure t
-  :init
-  (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
-  :config
-  (setq highlight-indent-guides-method 'character)) 
+;; (use-package highlight-indent-guides
+;;   :ensure t
+;;   :init
+;;   (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+;;   :config
+;;   (setq highlight-indent-guides-method 'character)) 
 
 ;; truncate lines
 (set-default 'truncate-lines t)
