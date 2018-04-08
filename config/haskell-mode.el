@@ -17,7 +17,8 @@
 ;; Red-Portal/.emacs.d Red-Portal's personal emacs settings. 
 ;; Copyright (C) 2017 Red-Portal 
 
-(add-to-list 'auto-mode-alist '("\\.hs\\'" . haskell-mode))
+;;(add-to-list 'auto-mode-alist '("\\.hs\\'" . haskell-mode))
 
 (use-package haskell-mode
-  :ensure t)
+  :ensure t
+  :mode(("\\.hs\\'" . haskell-mode)))

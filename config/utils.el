@@ -15,18 +15,7 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-(defvar setup-mode nil)
-(check-if-setup-mode)
-
-(require 'ox)
-
-(eval-after-load "org"
-  (use-package ox-gfm
-    :ensure t
-    :config
-    (setq org-src-fontify-natively t)))
-
-(setq org-highlight-latex-and-related '(latex script entities))
-
-(use-package htmlize
-  :ensure t)
+(defun kill-all-buffers ()
+  "Kill emacs buffers."
+  (interactive)
+  (mapc 'kill-buffer (delq (current-buffer) (buffer-list))))

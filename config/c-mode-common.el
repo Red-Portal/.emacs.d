@@ -62,64 +62,70 @@
 (use-package rtags
   :if (not (string-equal system-type "windows-nt"))
   :ensure t
-  :bind
-  ("C-;" . company-rtags)
   :config
   (if setup-mode
       (rtags-install) nil)
-  (setq rtags-path "~/.emacs.d/elpa/rtags-20171023.2014/rtags-2.14/bin/")
-  (add-hook 'c-mode-common-hook 'rtags-start-process-unless-running)
-  (setq rtags-autostart-diagnostics t)
-  (setq rtags-completions-enabled t)
-  (rtags-diagnostics))
+  (setq rtags-path "~/.emacs.d/elpa/rtags-20171215.1410/rtags-2.16/bin")
+  (add-hook 'c-mode-common-hook 'rtags-start-process-unless-running))
+;;(setq rtags-autostart-diagnostics t)
+;;(setq rtags-completions-enabled t)
+;;(rtags-diagnostics))
 
 ;; flycheck rtags integration
-(use-package flycheck-rtags
-  :if (not (string-equal system-type "windows-nt"))
-  :ensure t
-  :config
-  (defun c++-mode-rtags-hook ()
-    (interactive)
-    (flycheck-select-checker 'rtags))
-  ;;(setq-local flycheck-highlighting-mode nil)
-  ;;(setq-local flycheck-check-syntax-automatically nil))
-  (add-hook 'c-mode-common-hook #'c++-mode-rtags-hook))
+;; (use-package flycheck-rtags
+;;   :if (not (string-equal system-type "windows-nt"))
+;;   :ensure t
+;;   :config
+;;   (defun c++-mode-rtags-hook ()
+;;     (interactive)
+;;     (flycheck-select-checker 'rtags))
+;;   (add-hook 'c-mode-common-hook #'c++-mode-rtags-hook))
 
 (use-package cmake-ide
   :ensure t
   :config
-  (cmake-ide-setup))
+  (require 'subr-x)
+  (cmake-ide-setup)
+  (defadvice cmake-ide--run-cmake-impl
+      (after copy-compile-commands-to-project-dir activate)
+    (if (file-exists-p (concat project-dir "/compile_commands.json"))
+	(progn 
+	  (cmake-ide--message "[advice] found compile_commands.json" )
+	  (copy-file (concat project-dir "compile_commands.json") cmake-dir)
+	  (cmake-ide--message "[advice] copying compile_commands.json to %s" cmake-dir))
+      (cmake-ide--message "[advice] couldn't find compile_commands.json" ))))
 
 (use-package irony
-  :if (string-equal system-type "windows-nt")
   :ensure t
+  :bind
+  ("C-;" . company-irony)
   :init
   (if setup-mode
       (irony-install-server t) nil)
-  (when (boundp 'w32-pipe-read-delay)
-    (setq w32-pipe-read-delay 0))
-  (when (boundp 'w32-pipe-buffer-size)
-    (setq irony-server-w32-pipe-buffer-size (* 64 1024)))
+  (if (string= system-type "windows-nt") 
+      (when (boundp 'w32-pipe-read-delay)
+	(setq w32-pipe-read-delay 0))
+    (when (boundp 'w32-pipe-buffer-size)
+      (setq irony-server-w32-pipe-buffer-size (* 64 1024))))
   (add-hook 'c-mode-common-hook 'irony-mode))
 
 (use-package company-irony
-  :if (string-equal system-type "windows-nt")
   :ensure t
   :init
   (add-hook 'c-mode-common-hook
-	    (lambda ()
-	      (add-to-list 'company-backends 'company-irony))))
+            (lambda ()
+              (add-to-list 'company-backends 'company-irony)))
+  (setq company-async-timeout 10))
 
-(use-package company-rtags
-  :if (not (string-equal system-type "windows-nt"))
-  :ensure t
-  :config
-  (add-hook 'c-mode-common-hook
-	    (lambda ()
-	      (add-to-list 'company-backends 'company-rtags))))
+;; (use-package company-rtags
+;;   :if (not (string-equal system-type "windows-nt"))
+;;   :ensure t
+;;   :config
+;;   (add-hook 'c-mode-common-hook
+;; 	    (lambda ()
+;; 	      (add-to-list 'company-backends 'company-rtags))))
 
 (use-package company-irony-c-headers
-  :if (string-equal system-type "windows-nt")
   :ensure t
   :init
   (add-hook 'c-mode-common-hook

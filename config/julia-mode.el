@@ -14,19 +14,18 @@
 ;;
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
+;; Red-Portal/.emacs.d Red-Portal's personal emacs settings. 
+;; Copyright (C) 2017 Red-Portal 
 
-(defvar setup-mode nil)
-(check-if-setup-mode)
+(use-package julia-mode
+  :ensure t
+  :mode("\\.jl\\'" . julia-mode))
 
-(require 'ox)
-
-(eval-after-load "org"
-  (use-package ox-gfm
-    :ensure t
-    :config
-    (setq org-src-fontify-natively t)))
-
-(setq org-highlight-latex-and-related '(latex script entities))
-
-(use-package htmlize
+(use-package julia-shell
   :ensure t)
+
+(use-package flycheck-julia
+  :ensure t
+  :config
+  (add-hook 'julia-mode-hook 'flycheck-julia-setup))
+
