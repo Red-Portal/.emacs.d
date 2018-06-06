@@ -65,7 +65,7 @@
   :config
   (if setup-mode
       (rtags-install) nil)
-  (setq rtags-path "~/.emacs.d/elpa/rtags-20171215.1410/rtags-2.16/bin")
+  (setq rtags-path "~/.emacs.d/elpa/rtags-20180224.1658/rtags-2.18/bin")
   (add-hook 'c-mode-common-hook 'rtags-start-process-unless-running))
 ;;(setq rtags-autostart-diagnostics t)
 ;;(setq rtags-completions-enabled t)
