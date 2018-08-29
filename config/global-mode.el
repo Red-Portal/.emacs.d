@@ -56,14 +56,11 @@
 ;;   :config
 ;;   (add-hook 'prog-mode-hook 'fci-mode))
 
-
-(defun forward-lines-fast()
-  "jump multiple lines forward"
+(defun next-line-fast()
   (interactive)
   (next-line 5))
 
-(defun backward-lines-fast()
-  "jump multiple lines forward"
+(defun prvious-line-fast()
   (interactive)
   (previous-line 5))
 
@@ -72,8 +69,8 @@
   :ensure t
   :bind
   (:map evil-normal-state-map
-	("J" . forward-lines-fast)
-	("K" . backward-lines-fast))
+	("J" . next-line-fast)
+	("K" . prvious-line-fast))
   :config
   (evil-mode 1)
   ;; windmove evil-mode extension
@@ -84,7 +81,6 @@
 	  ("C-j" . windmove-down)
 	  ("C-k" . windmove-up)
 	  ("C-l" . windmove-right))))
-
 
 ;; (load-theme 'spacemacs-dark)
 (use-package doom-themes
@@ -196,3 +192,26 @@
   :config
   (add-hook 'lisp-mode-hook 'highlight-parentheses-mode))
 
+(use-package evil-multiedit
+  :ensure t
+  :bind (
+	 :map evil-visual-state-map
+	 ("R" . evil-multiedit-match-all)
+	 ("C-M-D" . evil-multiedit-restore)
+	 ("M-d" . evil-multiedit-and-next)
+	 ("M-D" . evil-multiedit-and-prev)
+	 :map evil-normal-state-map
+	 ("M-d" . evil-multiedit-match-and-next)
+	 ("M-D" . evil-multiedit-match-and-prev)
+	 :map evil-insert-state-map
+	 ("M-d" . evil-multiedit-toggle-marker-here)
+	 :map evil-multiedit-state-map
+	 ("RET" . evil-multiedit-toggle-or-restrict-region)
+	 :map evil-motion-state-map
+	 ("RET" . evil-multiedit-toggle-or-restrict-region)
+	 :map evil-multiedit-state-map
+	 ("C-n" . evil-multiedit-next)
+	 ("C-p" . evil-multiedit-prev)
+	 :map evil-multiedit-insert-state-map
+	 ("C-n" . evil-multiedit-next)
+	 ("C-p" . evil-multiedit-prev)))
