@@ -215,3 +215,6 @@
 	 :map evil-multiedit-insert-state-map
 	 ("C-n" . evil-multiedit-next)
 	 ("C-p" . evil-multiedit-prev)))
+
+(global-set-key (kbd "S-SPC") 'toggle-input-method)
+;;
