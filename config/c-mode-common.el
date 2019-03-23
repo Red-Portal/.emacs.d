@@ -38,19 +38,14 @@
 
 (add-hook 'c-mode-common-hook #'electric-pair-mode)
 
-(setq c-default-style "bsd")
-
 (add-hook 'c-mode-common-hook
 	  '(lambda ()
-	     (setq tab-width 4
-		   indent-tabs-mode nil
-		   indent-level 4
-		   c-basic-offset 4)))
-
-(setq tab-width 4
-      indent-tabs-mode nil
-      indent-level 4
-      c-basic-offset 4)
+	     (setq
+	      c-default-style "bsd"
+	      tab-width 4
+	      indent-tabs-mode nil
+	      indent-level 4
+	      c-basic-offset 4)))
 
 ;;
 (use-package ivy-rtags

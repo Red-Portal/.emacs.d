@@ -51,8 +51,9 @@
 
 (load-file "~/.emacs.d/config/global-mode.el")
 (load-file "~/.emacs.d/config/c-mode-common.el")
-(load-file "~/.emacs.d/config/julia-mode.el")
+(load-file "~/.emacs.d/config/c-mode.el")
 (load-file "~/.emacs.d/config/c++-mode.el")
+(load-file "~/.emacs.d/config/julia-mode.el")
 (load-file "~/.emacs.d/config/markdown-mode.el")
 (load-file "~/.emacs.d/config/org-mode.el")
 (load-file "~/.emacs.d/config/yaml-mode.el")
