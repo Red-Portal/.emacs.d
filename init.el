@@ -94,7 +94,7 @@
      ("melpa" . "https://melpa.org/packages/"))))
  '(package-selected-packages
    (quote
-    (doom-modeline telephone-line el-get hydra leaf-keywords counsel leaf stan-mode ivy-bibtex latex-preview-pane evil-multiedit opencl-mode htmlize ess-site flycheck-julia julia-shell julia-mode nlinum-hl fill-column-indicator smooth-scroll highlight-parentheses highlight-indent-guides yaml-mode ein company-rtags cuda-mode highlight-symbol solaire-mode ox-gfm haskell-mode smartparens company-jedi function-args evil-magit magit aggressive-indent markdown-mode srefactor ivy-rtags flycheck-rtags irony-mode electric-pair-mode use-package company-irony-c-headers cmake-mode flycheck-irony flycheck spacemacs-theme cmake-ide company-irony irony company doom-themes rainbow-delimiters evil ivy))))
+    (clang-format doom-modeline telephone-line el-get hydra leaf-keywords counsel leaf stan-mode ivy-bibtex latex-preview-pane evil-multiedit opencl-mode htmlize ess-site flycheck-julia julia-shell julia-mode nlinum-hl fill-column-indicator smooth-scroll highlight-parentheses highlight-indent-guides yaml-mode ein company-rtags cuda-mode highlight-symbol solaire-mode ox-gfm haskell-mode smartparens company-jedi function-args evil-magit magit aggressive-indent markdown-mode srefactor ivy-rtags flycheck-rtags irony-mode electric-pair-mode use-package company-irony-c-headers cmake-mode flycheck-irony flycheck spacemacs-theme cmake-ide company-irony irony company doom-themes rainbow-delimiters evil ivy))))
 (put 'upcase-region 'disabled nil)
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

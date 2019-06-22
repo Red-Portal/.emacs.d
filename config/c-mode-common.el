@@ -34,10 +34,13 @@
 	indent-level 4
 	c-basic-offset 4))
 
+(leaf clang-format
+  :ensure t
+  :require t)
+
 (add-hook 'c-mode-common-hook 'c-mode-style)
 (add-hook 'c-mode-common-hook 'fci-mode)
 
-;;
 (leaf ivy-rtags
   :if (not (string-equal system-type "windows-nt"))
   :ensure t
