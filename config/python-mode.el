@@ -15,26 +15,23 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-(defvar setup-mode nil)
-(check-if-setup-mode)
-
 (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
+(add-hook 'python-mode-hook 'fci-mode)
 
 (setq python-indent-offset 4)
+
+(defun jedi-company-backend ()
+  (add-to-list 'company-backends 'company-jedi))
 
 ;; external dependencies
 ;;   - jedi
 ;;   - virtualenv
 (use-package company-jedi
   :ensure t
-  :init
-  (add-hook 'python-mode-hook
-	    (lambda ()
-	      (add-to-list 'company-backends 'company-jedi)))
-  (add-hook 'python-mode-hook 'jedi-mode)
-  :config
-  (if setup-mode
-      (jedi:install-server)))
+  :hook
+  (python-mode-hook . jedi-backend)
+  (python-mode-hook . jedi-mode))
+;; (jedi:install-server)
 
 (use-package ein
   :ensure t)

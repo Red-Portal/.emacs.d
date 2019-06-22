@@ -15,6 +15,6 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-(use-package yaml-mode
+(leaf yaml-mode
   :ensure t
   :mode(("\\.yml\\'" . yaml-mode)))

@@ -19,7 +19,7 @@
 
 ;;(add-to-list 'auto-mode-alist '("\\.hs\\'" . haskell-mode))
 
-(use-package haskell-mode
+(leaf haskell-mode
   :ensure t
   :mode(("\\.hs\\'" . haskell-mode))
   :config(aggressive-indent-mode 0))

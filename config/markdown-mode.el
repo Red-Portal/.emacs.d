@@ -15,10 +15,11 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-(use-package markdown-mode
+(leaf markdown-mode
   :ensure t
   :commands(markdown-mode gfm-mode)
   :mode(("README\\.md\\'" . gfm-mode)
 	("\\.md\\'" . markdown-mode)
 	("\\.markdown\\'" . markdwon-mode))
-  :init(setq markdown-command "multimarkdown"))
+  :config
+  (setq markdown-command "multimarkdown"))

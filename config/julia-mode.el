@@ -17,15 +17,19 @@
 ;; Red-Portal/.emacs.d Red-Portal's personal emacs settings. 
 ;; Copyright (C) 2017 Red-Portal 
 
-(use-package julia-mode
+(leaf julia-mode
   :ensure t
-  :mode("\\.jl\\'" . julia-mode))
+  :require t
+  :mode
+  ("\\.jl\\'" . julia-mode))
 
-(use-package julia-shell
+(add-hook 'julia-mode-hook 'fci-mode)
+
+(leaf julia-shell
   :ensure t)
 
-(use-package flycheck-julia
+(leaf flycheck-julia
   :ensure t
-  :config
-  (add-hook 'julia-mode-hook 'flycheck-julia-setup))
+  :hook
+  (julia-mode-hook . flycheck-julia-setup))
 

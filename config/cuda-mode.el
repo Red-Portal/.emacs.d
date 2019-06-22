@@ -15,8 +15,10 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-(use-package cuda-mode
-  :ensure t)
+(leaf cuda-mode
+  :ensure t
+  :require t
+  :mode
+  ("\\.cu\\'" . cuda-mode)
+  ("\\.cuhl\\'" . cuda-mode))
 
-(add-to-list 'auto-mode-alist '("\\.cu\\'" . cuda-mode))
-(add-to-list 'auto-mode-alist '("\\.cuhl\\'" . cuda-mode))

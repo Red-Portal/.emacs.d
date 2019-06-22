@@ -15,46 +15,58 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-;;smex command key-bindings
-;; using smex-ivy for the actual M-x stuff
-(use-package smex
-  :ensure t
-  :config
-  (smex-initialize))
-
-
-;; ivy + smex
-(use-package ivy-smex
-  :load-path "github/ivy-smex/"
-  :bind ("M-x" . ivy-smex))
-
-;; line numbers
-(use-package nlinum-hl
-  :ensure t
-  :config
-  (global-nlinum-mode t)
-  (setq nlinum-highlight-current-line t))
+(setq tramp-default-method "ssh")
 
 ;; ivy settings
-(use-package ivy
+(leaf ivy
+  :require t
   :ensure t
   :config
-  (ivy-mode 1))
+  (ivy-mode 1)
+  (setq ivy-re-builders-alist
+      '((t . ivy--regex-fuzzy))))
 
+(leaf smex
+  :require t
+  :ensure t)
+
+(leaf counsel
+  :require counsel smex
+  :ensure t
+  :bind
+  ("M-x" . counsel-M-x)
+  :config
+  (setcdr (assoc 'counsel-M-x ivy-initial-inputs-alist) ""))
+
+;; Line number
+(when (version<= "26.0.50" emacs-version )
+  (global-display-line-numbers-mode))
 
 ;; global company config
-(use-package company
+(leaf company
+  :require t
   :ensure t
   :config
   (global-company-mode)
-  (setq company-idle-delay 0.3))
-
+  ;;(setq company-idle-delay 0.3)
+  (setq company-dabbrev-downcase 0)
+  (setq company-idle-delay 0.1))
 
 ;; 80 column indicator bar
-;; (use-package fill-column-indicator
-;;   :ensure t
-;;   :config
-;;   (add-hook 'prog-mode-hook 'fci-mode))
+(leaf fill-column-indicator
+  :ensure t
+  :hook 
+  :config
+  (setq fci-rule-column 80)
+  (defvar-local company-fci-mode-on-p nil)
+  (defun company-turn-off-fci (&rest ignore)
+    (setq company-fci-mode-on-p fci-mode)
+    (when fci-mode (fci-mode -1)))
+  (defun company-maybe-turn-on-fci (&rest ignore)
+    (when company-fci-mode-on-p (fci-mode 1)))
+  (add-hook 'company-completion-started-hook #'company-turn-off-fci)
+  (add-hook 'company-completion-finished-hook #'company-maybe-turn-on-fci)
+  (add-hook 'company-completion-cancelled-hook #'company-maybe-turn-on-fci))
 
 (defun next-line-fast()
   (interactive)
@@ -64,26 +76,26 @@
   (interactive)
   (previous-line 5))
 
-;; evil mode config
-(use-package evil
+(leaf evil
+  :require evil windmove
   :ensure t
   :bind
-  (:map evil-normal-state-map
-	("J" . next-line-fast)
-	("K" . prvious-line-fast))
+  ((:evil-normal-state-map
+    ("J" . next-line-fast)
+    ("K" . prvious-line-fast))
+   (:evil-normal-state-map
+    ("C-h" . windmove-left)
+    ("C-j" . windmove-down)
+    ("C-k" . windmove-up)
+    ("C-l" . windmove-right)))
   :config
   (evil-mode 1)
-  ;; windmove evil-mode extension
-  (use-package windmove
-    :bind
-    (:map evil-normal-state-map
-	  ("C-h" . windmove-left)
-	  ("C-j" . windmove-down)
-	  ("C-k" . windmove-up)
-	  ("C-l" . windmove-right))))
+  (turn-on-evil-mode))
 
-;; (load-theme 'spacemacs-dark)
-(use-package doom-themes
+(evil-mode 1)
+(turn-on-evil-mode)
+
+(leaf doom-themes
   :ensure t
   :config
   (setq doom-themes-enable-bold t
@@ -92,61 +104,69 @@
   (load-theme 'doom-one t)
   (doom-themes-visual-bell-config))
 
-(use-package solaire-mode
+(leaf solaire-mode
   :ensure t
-  :init
-  (add-hook 'after-change-major-mode-hook #'turn-on-solaire-mode)
-  (add-hook 'minibuffer-setup-hook #'solaire-mode-in-minibuffer)
+  :hook
+  (after-change-major-mode-hook . turn-on-solaire-mode)
+  (minibuffer-setup-hook . solaire-mode-in-minibuffer)
   :config
   (setq solaire-mode-remap-modeline nil))
 
-
 ;;flycheck configurations
-(use-package flycheck
+(leaf flycheck
+  :require t
   :ensure t
   :config
   (global-flycheck-mode))
 
-
 ;; mode line mode configurations
-(use-package airline-themes
-  :ensure t
-  :config
-  (load-theme 'airline-doom-molokai t)
-  (setq powerline-height 33)
-  (setq airline-shortened-directory-length 20)
-  (setq powerline-default-separator 'slant))
+;; (leaf airline-themes
+;;   :ensure t
+;;   :config
+;;   (load-theme 'airline-doom-molokai t)
+;;   (setq powerline-height 33)
+;;   (setq airline-shortened-directory-length 20)
+;;   (setq powerline-default-separator 'slant))
 
+(leaf doom-modeline
+  :ensure t
+  :init
+  (setq doom-modeline-height 30)
+  :config
+  (doom-modeline-mode t))
 
 ;;windMove (moving between windows using shift+arrows)
 (when (fboundp 'windmove-default-keybindings)
   (windmove-default-keybindings))
 
 ;; aggressive-indent-mode
-(use-package aggressive-indent
+(leaf aggressive-indent
   :ensure t
   :init
   ;; (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
   ;; (add-hook 'c-mode-common-hook #'aggressive-indent-mode)
-  :config
+  ;;:config
   ;; currently experimentally using global mode enabled
-  (global-aggressive-indent-mode 1))
+  ;;(global-aggressive-indent-mode 1))
+  )
 
 ;; magit setup
-(use-package magit
+(leaf magit
+  :require t
   :ensure t
   :bind
   ("C-x g" . magit-status))
 
-(use-package evil-magit
+(leaf evil-magit
   :ensure t)
 
 ;; highlight symbol
-(use-package highlight-symbol
-  :ensure t
-  :config
-  (highlight-symbol-mode)
-  (setq highlight-symbol-idle-delay 0))
+;; (leaf highlight-symbol
+;;   :ensure t
+;;   :config
+;;   (highlight-symbol-mode)
+;;   (setq highlight-symbol-idle-delay 0))
+
 (global-hl-line-mode t)
 
 ;; font settings
@@ -169,10 +189,6 @@
       mouse-wheel-scroll-amount '(3 ((shift). 1))
       mouse-wheel-progressive-speed nil)
 
-(use-package ivy-smex
-  :load-path "github/ivy-smex/"
-  :bind ("M-x" . ivy-smex))
-
 ;; indent guide mode
 ;; (use-package highlight-indent-guides
 ;;   :ensure t
@@ -185,36 +201,35 @@
 (set-default 'truncate-lines t)
 (add-hook 'compilation-mode-hook '(lambda ()(toggle-truncate-lines)))
 
-
 ;; matching parenthese highlight mode
-(use-package highlight-parentheses
-  :ensure t
-  :config
-  (add-hook 'lisp-mode-hook 'highlight-parentheses-mode))
+;; (leaf highlight-parentheses
+;;   :ensure t
+;;   :hook
+;;   (lisp-mode-hook . highlight-parentheses-mode)
+;;   (prog-mode-hook . highlight-parentheses-mode))
 
-(use-package evil-multiedit
+(leaf evil-multiedit
   :ensure t
-  :bind (
-	 :map evil-visual-state-map
-	 ("R" . evil-multiedit-match-all)
-	 ("C-M-D" . evil-multiedit-restore)
-	 ("M-d" . evil-multiedit-and-next)
-	 ("M-D" . evil-multiedit-and-prev)
-	 :map evil-normal-state-map
-	 ("M-d" . evil-multiedit-match-and-next)
-	 ("M-D" . evil-multiedit-match-and-prev)
-	 :map evil-insert-state-map
-	 ("M-d" . evil-multiedit-toggle-marker-here)
-	 :map evil-multiedit-state-map
-	 ("RET" . evil-multiedit-toggle-or-restrict-region)
-	 :map evil-motion-state-map
-	 ("RET" . evil-multiedit-toggle-or-restrict-region)
-	 :map evil-multiedit-state-map
-	 ("C-n" . evil-multiedit-next)
-	 ("C-p" . evil-multiedit-prev)
-	 :map evil-multiedit-insert-state-map
-	 ("C-n" . evil-multiedit-next)
-	 ("C-p" . evil-multiedit-prev)))
+  :bind
+  (:evil-visual-state-map
+   ("R" . evil-multiedit-match-all)
+   ("C-M-D" . evil-multiedit-restore)
+   ("M-d" . evil-multiedit-and-next)
+   ("M-D" . evil-multiedit-and-prev))
+  (:evil-normal-state-map
+   ("M-d" . evil-multiedit-match-and-next)
+   ("M-D" . evil-multiedit-match-and-prev))
+  (:evil-insert-state-map
+   ("M-d" . evil-multiedit-toggle-marker-here))
+  (:evil-multiedit-state-map
+   ("RET" . evil-multiedit-toggle-or-restrict-region))
+  (:evil-motion-state-map
+   ("RET" . evil-multiedit-toggle-or-restrict-region))
+  (:evil-multiedit-state-map
+   ("C-n" . evil-multiedit-next)
+   ("C-p" . evil-multiedit-prev))
+  (:evil-multiedit-insert-state-map
+   ("C-n" . evil-multiedit-next)
+   ("C-p" . evil-multiedit-prev)))
 
 (global-set-key (kbd "S-SPC") 'toggle-input-method)
-;;

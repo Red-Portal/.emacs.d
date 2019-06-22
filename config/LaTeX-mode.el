@@ -17,28 +17,24 @@
 ;; Red-Portal/.emacs.d Red-Portal's personal emacs settings. 
 ;; Copyright (C) 2017 Red-Portal 
 
-;;(add-to-list 'auto-mode-alist '("\\.hs\\'" . haskell-mode))
+(defun dont-truncate-lines ()
+    (setq-local truncate-lines nil))
 
-(use-package ivy-bibtex
+(leaf ivy-bibtex
   :ensure t
+  :hook
+  ;;((LaTeX-mode-hook latex-mode-hook) . set-local-bibtex-database-file)
+  ((LaTeX-mode-hook latex-mode-hook) . dont-truncate-lines)
   :config
   (setq ivy-re-builders-alist
 	'((ivy-bibtex . ivy--regex-ignore-order)
 	  (t . ivy--regex-plus))))
 
+(defun preview-pane-prompt ()
+  (setq-local latex-preview-pane-multifile-mode 'prompt))
+
 (use-package latex-preview-pane 
-  :ensure t)
-
-(add-hook 'LaTeX-mode-hook (lambda ()(setq-local truncate-lines nil)))
-(add-hook 'latex-mode-hook (lambda ()(setq-local truncate-lines nil)))
-
-(add-hook 'latex-mode-hook
-	  (lambda ()(setq-local bibtex-completion-bibliography '("./references.bib"))))
-(add-hook 'Latex-mode-hook
-	  (lambda ()(setq-local bibtex-completion-bibliography '("./references.bib"))))
-
-(add-hook 'latex-mode-hook
-	  (lambda ()(setq-local latex-preview-pane-multifile-mode 'prompt)))
-(add-hook 'Latex-mode-hook
-	  (lambda ()(setq-local latex-preview-pane-multifile-mode 'prompt)))
+  :ensure t
+  :hook
+  ((LaTeX-mode-hook latex-mode-hook) . preview-pane-prompt))
 

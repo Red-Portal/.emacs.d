@@ -15,7 +15,7 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-(use-package opencl-mode
+(leaf opencl-mode
   :ensure t
   :mode(("\\.cl\\'" . opencl-mode)))
 
