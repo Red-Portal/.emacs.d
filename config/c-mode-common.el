@@ -31,21 +31,20 @@
   :init
   (setq cmake-tab-width 4))
 
-
 ;;(use-package electric-spacing
 ;; :init
 ;; (add-hook 'c-mode-common-hook #'electric-spacing-mode))
 
 (add-hook 'c-mode-common-hook #'electric-pair-mode)
 
-(add-hook 'c-mode-common-hook
-	  '(lambda ()
-	     (setq
-	      c-default-style "bsd"
-	      tab-width 4
-	      indent-tabs-mode nil
-	      indent-level 4
-	      c-basic-offset 4)))
+(defun c-mode-style ()
+  (setq c-default-style "bsd"
+	tab-width 4
+	indent-tabs-mode nil
+	indent-level 4
+	c-basic-offset 4))
+
+(add-hook 'c-mode-common-hook   'c-mode-style)
 
 ;;
 (use-package ivy-rtags
@@ -60,7 +59,7 @@
   :config
   (if setup-mode
       (rtags-install) nil)
-  (setq rtags-path "~/.emacs.d/elpa/rtags-20181205.1639/rtags-2.21/bin")
+  (setq rtags-path "~/.emacs.d/elpa/rtags-20190621.2006/rtags-2.32/bin")
   (add-hook 'c-mode-common-hook 'rtags-start-process-unless-running))
 ;;(setq rtags-autostart-diagnostics t)
 ;;(setq rtags-completions-enabled t)
