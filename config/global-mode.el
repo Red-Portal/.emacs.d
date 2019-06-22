@@ -158,7 +158,8 @@
   ("C-x g" . magit-status))
 
 (leaf evil-magit
-  :ensure t)
+  :ensure t
+  :require evil-magit)
 
 ;; highlight symbol
 ;; (leaf highlight-symbol
