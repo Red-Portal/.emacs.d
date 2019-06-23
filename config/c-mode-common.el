@@ -27,12 +27,11 @@
 
 (add-hook 'c-mode-common-hook #'electric-pair-mode)
 
-(defun c-mode-style ()
-  (setq c-default-style "bsd"
-	tab-width 4
-	indent-tabs-mode nil
-	indent-level 4
-	c-basic-offset 4))
+(setq c-default-style "bsd"
+      tab-width 8
+      indent-tabs-mode nil
+      indent-level 4
+      c-basic-offset 4)
 
 (leaf clang-format
   :ensure t

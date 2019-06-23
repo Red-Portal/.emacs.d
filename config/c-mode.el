@@ -17,4 +17,4 @@
 ;; Red-Portal/.emacs.d Red-Portal's personal emacs settings. 
 
 ;; adding various c++ extensions to list
-(add-to-list 'auto-mode-alist '("\\.c\\'" . c-mode))
+;; (add-to-list 'auto-mode-alist '("\\.c\\'" . c-mode))
