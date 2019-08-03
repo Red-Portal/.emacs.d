@@ -26,11 +26,5 @@
   :config
     (setq org-src-fontify-natively t))
 
-(eval-after-load "org"
-  (use-package ox-gfm
-    :ensure t
-    :config
-    (setq org-src-fontify-natively t)))
-
 (leaf htmlize
   :ensure t)

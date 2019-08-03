@@ -25,7 +25,7 @@
 ;; :init
 ;; (add-hook 'c-mode-common-hook #'electric-spacing-mode))
 
-(add-hook 'c-mode-common-hook #'electric-pair-mode)
+;;(add-hook 'c-mode-common-hook #'electric-pair-mode)
 
 (setq c-default-style "bsd"
       tab-width 8
@@ -37,7 +37,7 @@
   :ensure t
   :require t)
 
-(add-hook 'c-mode-common-hook 'c-mode-style)
+; ;(add-hook 'c-mode-common-hook 'c-mode-style)
 (add-hook 'c-mode-common-hook 'fci-mode)
 
 (leaf ivy-rtags
@@ -87,8 +87,6 @@
   :ensure t
   :hook
   (c-mode-common-hook . irony-mode) 
-  :bind
-  ("C-;" . company-irony)
   :init
     ;;  (irony-install-server t) nil)
   (if (string= system-type "windows-nt") 
@@ -102,10 +100,12 @@
 
 (leaf company-irony
   :ensure t
+  :bind
+  ("C-;" . company-irony)
   :hook
   (c-mode-common-hook . irony-company-backend)
-  ;; (setq company-async-timeout 10)
-  )
+  :config
+  (setq company-async-timeout 5))
 
 ;; (use-package company-rtags
 ;;   :if (not (string-equal system-type "windows-nt"))

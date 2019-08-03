@@ -17,7 +17,14 @@
 
 (setq tramp-default-method "ssh")
 
-;; ivy settings
+(leaf quelpa
+  :ensure t
+  :require t)
+
+(leaf electric-pair-mod
+  :config
+  (electric-pair-mode t))
+
 (leaf ivy
   :require t
   :ensure t
@@ -42,7 +49,6 @@
 (when (version<= "26.0.50" emacs-version )
   (global-display-line-numbers-mode))
 
-;; global company config
 (leaf company
   :require t
   :ensure t
@@ -52,7 +58,6 @@
   (setq company-dabbrev-downcase 0)
   (setq company-idle-delay 0.1))
 
-;; 80 column indicator bar
 (leaf fill-column-indicator
   :ensure t
   :hook 
@@ -112,26 +117,20 @@
   :config
   (setq solaire-mode-remap-modeline nil))
 
-;;flycheck configurations
 (leaf flycheck
   :require t
   :ensure t
   :config
   (global-flycheck-mode))
 
-;; mode line mode configurations
-;; (leaf airline-themes
-;;   :ensure t
-;;   :config
-;;   (load-theme 'airline-doom-molokai t)
-;;   (setq powerline-height 33)
-;;   (setq airline-shortened-directory-length 20)
-;;   (setq powerline-default-separator 'slant))
-
 (leaf doom-modeline
   :ensure t
+  :require all-the-icons ;; require M-x all-the-icons-install-fonts
   :init
   (setq doom-modeline-height 30)
+  (setq doom-modeline-enable-word-count t)
+  (setq doom-modeline-column-zero-based t)
+  (setq doom-modeline t)
   :config
   (doom-modeline-mode t))
 
@@ -150,7 +149,6 @@
   ;;(global-aggressive-indent-mode 1))
   )
 
-;; magit setup
 (leaf magit
   :require t
   :ensure t
@@ -189,6 +187,15 @@
       scroll-down-aggressively 0.5
       mouse-wheel-scroll-amount '(3 ((shift). 1))
       mouse-wheel-progressive-speed nil)
+
+(defun lsp-company-backend()
+  (add-to-list 'company-backends 'company-lsp))
+
+(leaf company-lsp
+  :ensure t
+  :init
+  (setq lsp-auto-configure t)
+  :require lsp-mode)
 
 ;; indent guide mode
 ;; (use-package highlight-indent-guides

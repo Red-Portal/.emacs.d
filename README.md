@@ -27,12 +27,13 @@ Red-Portal's personal emacs configurations. Free, open to everyone.<br />
 
     git clone --recursive https://github.com/Red-Portal/.emacs.d ~/
     cd ~/.emacs.d
-    emacs -setup
+	emacs
 
 Certain emacs packages are supposed to run a initial command at first startup. <br />
-This is why `-setup` should be run an first startup.<br />
+Such packages include `[[https://github.com/Andersbakken/rtags][rtags]]`, 
+`[[https://github.com/Sarcasm/irony-mode][irony]]`. <br />
 
-By the help of `use-package` most packages should be automatically installed.<br />
+By the help of `[[https://github.com/conao3/leaf.el][leaf]]` most packages should be automatically installed.<br />
 Naturally, internet connection is required at first startup.<br />
 
 In order to properly use org-mode, You should run the commands below<br />
@@ -45,7 +46,7 @@ The Emacs default org-mode is sometimes outdated and causes problems.<br />
 
 ## Supported Platforms<a id="sec-1-2" name="sec-1-2"></a>
 
-Fully tested only on emacs25 and arch linux.<br />
+Fully tested only on emacs25 and Manjaro Linux (The best linux distro available).<br />
 All platforms supporting emacs25 are supposed to be partially supported.<br />
 
 The most important package for C++ which is `[[https://github.com/Andersbakken/rtags][rtags]]` is not yet supported on Windows.<br />
