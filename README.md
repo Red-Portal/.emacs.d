@@ -30,11 +30,11 @@ Red-Portal's personal emacs configurations. Free, open to everyone.<br />
 	emacs
 
 Certain emacs packages are supposed to run a initial command at first startup. <br />
-Such packages include [https://github.com/Andersbakken/rtags][rtags], 
-[https://github.com/Sarcasm/irony-mode][irony]. <br />
+Such packages include [rtags](https://github.com/Andersbakken/rtags), 
+ [irony](https://github.com/Sarcasm/irony-mode). <br />
 
-By the help of [https://github.com/conao3/leaf.el][leaf] most packages should be automatically installed.<br />
-Hopefully more advanced package installations using [feather][https://github.com/conao3/feather.el] 
+By the help of [leaf](https://github.com/conao3/leaf.el) most packages should be automatically installed.<br />
+Hopefully more advanced package installations using [feather](https://github.com/conao3/feather.el) 
 will be available in the future by the help of <br />
 Naturally, internet connection is required at first startup.<br />
 
