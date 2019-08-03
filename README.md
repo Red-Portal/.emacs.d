@@ -30,12 +30,12 @@ Red-Portal's personal emacs configurations. Free, open to everyone.<br />
 	emacs
 
 Certain emacs packages are supposed to run a initial command at first startup. <br />
-Such packages include [[https://github.com/Andersbakken/rtags][rtags]], 
-[[https://github.com/Sarcasm/irony-mode][irony]]. <br />
+Such packages include `[[https://github.com/Andersbakken/rtags][rtags]]`, 
+`[[https://github.com/Sarcasm/irony-mode][irony]]`. <br />
 
-By the help of [[https://github.com/conao3/leaf.el][leaf]] most packages should be automatically installed.<br />
-Hopefully more advanced package installations will be available by the help of 
-[[feather][https://github.com/conao3/feather.el]] <br />
+By the help of `[[https://github.com/conao3/leaf.el][leaf]]` most packages should be automatically installed.<br />
+Hopefully more advanced package installations using `[[feather][https://github.com/conao3/feather.el]]` 
+will be available in the future by the help of <br />
 Naturally, internet connection is required at first startup.<br />
 
 In order to properly use org-mode, You should run the commands below<br />
@@ -48,8 +48,8 @@ The Emacs default org-mode is sometimes outdated and causes problems.<br />
 
 ## Supported Platforms<a id="sec-1-2" name="sec-1-2"></a>
 
-Fully tested only on emacs25 and Manjaro Linux (The best linux distro available).<br />
-All platforms supporting emacs25 exept windows (The worst dev platform exsiting on earth) 
+Fully tested only on emacs26 and Manjaro Linux (The best linux distro available).<br />
+All platforms supporting emacs25 exept windows (The worst dev platform exsiting on earth), <br />
 are supposed to be partially supported.<br />
 
 ## Contribution<a id="sec-1-3" name="sec-1-3"></a>
