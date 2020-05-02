@@ -17,18 +17,14 @@
 ;; Red-Portal/.emacs.d Red-Portal's personal emacs settings. 
 ;; Copyright (C) 2017 Red-Portal 
 
-(quelpa '(lsp-julia :fetcher github :repo "non-Jedi/lsp-julia"))
-
-(leaf julia-mode
-  :ensure t
-  :require julia-mode lsp-julia
-  :hook
-  :mode
-  ("\\.jl\\'" . julia-mode))
+;; (quelpa '(lsp-julia :fetcher github :repo "non-Jedi/lsp-julia"))
 
 (add-hook 'julia-mode-hook 'fci-mode)
-(add-hook 'julia-mode-hook 'lsp-mode)
-(add-hook 'julia-mode-hook 'lsp-company-backend)
+;;(add-hook 'julia-mode-hook 'lsp-mode)
+;;(add-hook 'julia-mode-hook 'company-ess-julia-objects)
+
+(leaf julia-mode
+  :ensure t)
 
 (leaf julia-shell
   :ensure t)
@@ -37,5 +33,15 @@
   :ensure t
   :hook
   (julia-mode-hook . flycheck-julia-setup))
+
+(defun julia-company-backend()
+  (setq-local company-backends '((company-ess-julia-objects))))
+
+(leaf ess
+  :ensure t
+  :hook (julia-mode-hook . julia-company-backend)
+  :init (require 'ess-site))
+
+
 
 

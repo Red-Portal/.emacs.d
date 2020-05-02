@@ -24,35 +24,32 @@
 ;; set because of signature error
 (setq package-check-signature nil)
 
-(prog1 "prepare leaf"
-  (prog1 "package"
-    (custom-set-variables
-     '(package-archives '(("melpa stable" . "https://stable.melpa.org/packages/")
+;; <leaf-install-code>
+(eval-and-compile
+  (customize-set-variable
+   'package-archives '(("melpa stable" . "https://stable.melpa.org/packages/")
 			  ("gnu"          . "https://elpa.gnu.org/packages/")
 			  ("org"          . "https://orgmode.org/elpa/")
 			  ("marmalade"    . "https://marmalade-repo.org/packages/")
-			  ("melpa"        . "https://melpa.org/packages/"))))
-    (package-initialize))
+			  ("melpa"        . "https://melpa.org/packages/")))
+  (package-initialize)
+  (unless (package-installed-p 'leaf)
+    (package-refresh-contents)
+    (package-install 'leaf))
 
-  (prog1 "leaf"
-    (unless (package-installed-p 'leaf)
-      (unless (assoc 'leaf package-archive-contents)
-        (package-refresh-contents))
-      (condition-case err
-          (package-install 'leaf)
-        (error
-         (package-refresh-contents) ; renew local melpa cache if fail
-         (package-install 'leaf))))
+  ;; (leaf leaf-keywords
+  ;;   :ensure t
+  ;;   :init
+  ;;   ;; optional packages if you want to use :hydra, :el-get, :blackout,,,
+  ;;   ;; (leaf hydra :ensure t)
+  ;;   ;; (leaf el-get :ensure t)
+  ;;   ;; (leaf blackout :ensure t)
 
-    (leaf leaf-keywords
-      :ensure t
-      :config (leaf-keywords-init)))
-
-  (prog1 "optional packages for leaf-keywords"
-    ;; optional packages if you want to use :hydra, :el-get,,,
-    (leaf hydra :ensure t)
-    (leaf el-get :ensure t
-      :custom ((el-get-git-shallow-clone  . t)))))
+  ;;   :config
+  ;;   ;; initialize leaf-keywords.el
+  ;;   (leaf-keywords-init))
+  )
+;; </leaf-install-code>
 
 
 (defun load-directory (dir)
@@ -79,7 +76,7 @@
      ("melpa" . "https://melpa.org/packages/"))))
  '(package-selected-packages
    (quote
-    (company-lsp lsp-julia quelpa lsp-mode electric-pair-mod electric-pair clang-format doom-modeline telephone-line el-get hydra leaf-keywords counsel leaf stan-mode ivy-bibtex latex-preview-pane evil-multiedit opencl-mode htmlize ess-site flycheck-julia julia-shell julia-mode nlinum-hl fill-column-indicator smooth-scroll highlight-parentheses highlight-indent-guides yaml-mode ein company-rtags cuda-mode highlight-symbol solaire-mode ox-gfm haskell-mode smartparens company-jedi function-args evil-magit magit aggressive-indent markdown-mode srefactor ivy-rtags flycheck-rtags irony-mode electric-pair-mode company-irony-c-headers cmake-mode flycheck-irony flycheck spacemacs-theme cmake-ide company-irony irony company doom-themes rainbow-delimiters evil ivy))))
+    (feather smex ess company-lsp lsp-julia quelpa lsp-mode electric-pair-mod electric-pair clang-format doom-modeline telephone-line el-get hydra leaf-keywords counsel leaf stan-mode ivy-bibtex latex-preview-pane evil-multiedit opencl-mode htmlize ess-site flycheck-julia julia-shell julia-mode nlinum-hl fill-column-indicator smooth-scroll highlight-parentheses highlight-indent-guides yaml-mode ein company-rtags cuda-mode highlight-symbol solaire-mode ox-gfm haskell-mode smartparens company-jedi function-args evil-magit magit aggressive-indent markdown-mode srefactor ivy-rtags flycheck-rtags irony-mode electric-pair-mode company-irony-c-headers cmake-mode flycheck-irony flycheck spacemacs-theme cmake-ide company-irony irony company doom-themes rainbow-delimiters evil ivy))))
 (put 'upcase-region 'disabled nil)
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

@@ -36,5 +36,7 @@
 (leaf latex-preview-pane 
   :ensure t
   :hook
-  ((LaTeX-mode-hook latex-mode-hook) . preview-pane-prompt))
+  ((LaTeX-mode-hook latex-mode-hook) . preview-pane-prompt)
+  :config
+  (setq pdf-latex-command "xelatex"))
 

@@ -52,6 +52,8 @@
 (leaf company
   :require t
   :ensure t
+  :bind
+  ("S-RET" . company-complete)
   :config
   (global-company-mode)
   ;;(setq company-idle-delay 0.3)

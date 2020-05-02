@@ -50,10 +50,10 @@
   :if (not (string-equal system-type "windows-nt"))
   :ensure t
   :hook
-  (c-mode-common-hook . rtags-start-process-unless-running)
-  :config
+  (c-mode-common-hook . rtags-start-process-unless-running))
+;;:config
  ;;(rtags-install) nil)
-  (setq rtags-path "~/.emacs.d/elpa/rtags-20190621.2006/rtags-2.32/bin"))
+;;  (setq rtags-path "~/.emacs.d/elpa/rtags-20190621.2006/rtags-2.32/bin"))
   ;;(add-hook ))
 ;;(setq rtags-autostart-diagnostics t)
 ;;(setq rtags-completions-enabled t)
@@ -95,8 +95,11 @@
     (when (boundp 'w32-pipe-buffer-size)
       (setq irony-server-w32-pipe-buffer-size (* 64 1024)))))
 
+;; (eval-after-load 'company
+;;   '(add-to-list 'company-backends 'company-irony))
+
 (defun irony-company-backend()
-  (add-to-list 'company-backends 'company-irony))
+  (setq-local company-backends '((company-irony))))
 
 (leaf company-irony
   :ensure t
@@ -116,7 +119,7 @@
 ;; 	      (add-to-list 'company-backends 'company-rtags))))
 
 (defun irony-headers-company-backend()
-  (add-to-list 'company-backends 'company-irony-c-headers))
+  (setq-local company-backends '((company-irony-c-headers))))
 
 (leaf company-irony-c-headers
   :ensure t
