@@ -15,8 +15,14 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-(setq tramp-default-method "ssh")
+(leaf tramp
+  :require t
+  :config
+  (setq tramp-default-method "ssh")
+  
+  )
 
-;(add-to-list 'tramp-default-proxies-alist
-;	     '("SGCC" nil "/ssh:USERA@HOSTA:"))
+
+
+
 
