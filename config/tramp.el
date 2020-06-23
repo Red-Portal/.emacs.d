@@ -19,8 +19,8 @@
   :require t
   :config
   (setq tramp-default-method "ssh")
-  
-  )
+  (add-to-list 'tramp-default-proxies-alist
+	     '("163.239.88.120" nil "/ssh:kyurai@cspro9.sogang.ac.kr:")))
 
 
 

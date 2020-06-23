@@ -34,14 +34,21 @@
   :hook
   (julia-mode-hook . flycheck-julia-setup))
 
-(defun julia-company-backend()
-  (setq-local company-backends '((company-ess-julia-objects))))
-
-(leaf ess
+(leaf quelpa-use-package 
   :ensure t
-  :hook (julia-mode-hook . julia-company-backend)
-  :init (require 'ess-site))
+  :require quelpa)
 
+(quelpa
+ '(quelpa-use-package
+   :fetcher github
+   :repo "non-Jedi/lsp-julia"
+   :files (:defaults "languageserver")))
 
+(leaf lsp-julia
+  :require t
+  :hook
+  (julia-mode-hook . lsp-mode))
 
+;; (defun julia-company-backend()
+;;   (setq-local company-backends '((company-ess-julia-objects))))
 

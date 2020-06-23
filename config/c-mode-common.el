@@ -50,14 +50,11 @@
   :if (not (string-equal system-type "windows-nt"))
   :ensure t
   :hook
-  (c-mode-common-hook . rtags-start-process-unless-running))
-;;:config
- ;;(rtags-install) nil)
-;;  (setq rtags-path "~/.emacs.d/elpa/rtags-20190621.2006/rtags-2.32/bin"))
-  ;;(add-hook ))
-;;(setq rtags-autostart-diagnostics t)
-;;(setq rtags-completions-enabled t)
-;;(rtags-diagnostics))
+  (c-mode-common-hook . rtags-start-process-unless-running)
+  ;;(setq rtags-autostart-diagnostics t)
+  ;; (setq rtags-completions-enabled t)
+  ;;(setq rtags-path "../elpa/rtags-20200507.1824/rtags-2.38/bin")
+  (rtags-diagnostics))
 
 ;; flycheck rtags integration
 ;; (use-package flycheck-rtags
@@ -103,8 +100,8 @@
 
 (leaf company-irony
   :ensure t
-  :bind
-  ("C-;" . company-irony)
+  ;; :bind
+  ;; ("C-;" . company-irony)
   :hook
   (c-mode-common-hook . irony-company-backend)
   :config

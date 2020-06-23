@@ -47,16 +47,33 @@
 (when (version<= "26.0.50" emacs-version )
   (global-display-line-numbers-mode))
 
+(leaf lsp-mode
+  :ensure t
+  :hook
+  (lsp-mode . lsp))
+
 (leaf company
   :require t
   :ensure t
   :bind
   ("S-RET" . company-complete)
+  :init
+  (setq company-backends '((company-dabbrev-code :separate company-capf company-keywords)
+                         company-files
+                         company-keywords
+                         company-capf
+                         company-yasnippet
+                         company-abbrev
+                         company-dabbrev))
   :config
   (global-company-mode)
   ;;(setq company-idle-delay 0.3)
   (setq company-dabbrev-downcase 0)
   (setq company-idle-delay 0.1))
+
+(leaf company-box
+  :ensure t
+  :hook (company-mode . company-box-mode))
 
 (leaf fill-column-indicator
   :ensure t
@@ -159,13 +176,6 @@
   :ensure t
   :require evil-magit)
 
-;; highlight symbol
-;; (leaf highlight-symbol
-;;   :ensure t
-;;   :config
-;;   (highlight-symbol-mode)
-;;   (setq highlight-symbol-idle-delay 0))
-
 (global-hl-line-mode t)
 
 ;; font settings
@@ -217,27 +227,47 @@
 ;;   (prog-mode-hook . highlight-parentheses-mode))
 
 (leaf evil-multiedit
+  :require t
+  :ensure t
+  :config
+  (evil-multiedit-default-keybinds))
+
+;;;;;;;;;;;;;; Cheatsheet ;;;;;;;;;;;;;;
+;; ((:evil-visual-state-map
+;;    ("R" . evil-multiedit-match-all)
+;;    ("C-M-D" . evil-multiedit-restore)
+;;    ("M-d" . evil-multiedit-and-next)
+;;    ("M-D" . evil-multiedit-and-prev))
+;;   (:evil-normal-state-map
+;;    ("M-d" . evil-multiedit-match-and-next)
+;;    ("M-D" . evil-multiedit-match-and-prev))
+;;   (:evil-insert-state-map
+;;    ("M-d" . evil-multiedit-toggle-marker-here))
+;;   (:evil-multiedit-state-map
+;;    ("RET" . evil-multiedit-toggle-or-restrict-region))
+;;   (:evil-motion-state-map
+;;    ("RET" . evil-multiedit-toggle-or-restrict-region))
+;;   (:evil-multiedit-state-map
+;;    ("C-n" . evil-multiedit-next)
+;;    ("C-p" . evil-multiedit-prev))
+;;   (:evil-multiedit-insert-state-map
+;;    ("C-n" . evil-multiedit-next)
+;;    ("C-p" . evil-multiedit-prev)))
+
+(leaf evil
+  :require evil windmove
   :ensure t
   :bind
-  (:evil-visual-state-map
-   ("R" . evil-multiedit-match-all)
-   ("C-M-D" . evil-multiedit-restore)
-   ("M-d" . evil-multiedit-and-next)
-   ("M-D" . evil-multiedit-and-prev))
-  (:evil-normal-state-map
-   ("M-d" . evil-multiedit-match-and-next)
-   ("M-D" . evil-multiedit-match-and-prev))
-  (:evil-insert-state-map
-   ("M-d" . evil-multiedit-toggle-marker-here))
-  (:evil-multiedit-state-map
-   ("RET" . evil-multiedit-toggle-or-restrict-region))
-  (:evil-motion-state-map
-   ("RET" . evil-multiedit-toggle-or-restrict-region))
-  (:evil-multiedit-state-map
-   ("C-n" . evil-multiedit-next)
-   ("C-p" . evil-multiedit-prev))
-  (:evil-multiedit-insert-state-map
-   ("C-n" . evil-multiedit-next)
-   ("C-p" . evil-multiedit-prev)))
+  ((:evil-normal-state-map
+    ("J" . next-line-fast)
+    ("K" . prvious-line-fast))
+   (:evil-normal-state-map
+    ("C-h" . windmove-left)
+    ("C-j" . windmove-down)
+    ("C-k" . windmove-up)
+    ("C-l" . windmove-right)))
+  :config
+  (evil-mode 1)
+  (turn-on-evil-mode))
 
 (global-set-key (kbd "S-SPC") 'toggle-input-method)
