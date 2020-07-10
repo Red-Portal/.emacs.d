@@ -30,8 +30,8 @@
 (setq c-default-style "bsd"
       tab-width 8
       indent-tabs-mode nil
-      indent-level 4
-      c-basic-offset 4)
+      indent-level 2
+      c-basic-offset 2)
 
 (leaf clang-format
   :ensure t

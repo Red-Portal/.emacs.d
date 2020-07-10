@@ -50,7 +50,7 @@
 (leaf lsp-mode
   :ensure t
   :hook
-  (lsp-mode . lsp))
+  (lsp-mode-hook . lsp))
 
 (leaf company
   :require t
@@ -73,11 +73,14 @@
 
 (leaf company-box
   :ensure t
-  :hook (company-mode . company-box-mode))
+  :hook (company-mode-hook . company-box-mode))
 
 (leaf fill-column-indicator
   :ensure t
   :hook 
+  (company-completion-started-hook  . company-turn-off-fci)
+  (company-completion-finished-hook . company-maybe-turn-on-fci)
+  (company-completion-cancelled-hook . company-maybe-turn-on-fci)
   :config
   (setq fci-rule-column 80)
   (defvar-local company-fci-mode-on-p nil)
@@ -85,10 +88,7 @@
     (setq company-fci-mode-on-p fci-mode)
     (when fci-mode (fci-mode -1)))
   (defun company-maybe-turn-on-fci (&rest ignore)
-    (when company-fci-mode-on-p (fci-mode 1)))
-  (add-hook 'company-completion-started-hook #'company-turn-off-fci)
-  (add-hook 'company-completion-finished-hook #'company-maybe-turn-on-fci)
-  (add-hook 'company-completion-cancelled-hook #'company-maybe-turn-on-fci))
+    (when company-fci-mode-on-p (fci-mode 1))))
 
 (defun next-line-fast()
   (interactive)

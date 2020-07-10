@@ -17,6 +17,8 @@
 
 (leaf org
   :require org ox
+  :init
+  (setq org-startup-with-inline-images t)
   :config
   (setq org-highlight-latex-and-related '(latex script entities)))
 
@@ -28,3 +30,20 @@
 
 (leaf htmlize
   :ensure t)
+
+(leaf org-ql
+  :ensure t
+  )
+
+(leaf org-ref
+  :require t
+  :ensure t
+  :hook
+  (org-mode-hook . (lambda () (setq org-ref-default-bibliography '("references.bib"))))
+  (org-mode-hook . (lambda () (setq reftex-default-bibliography '("references.bib"))))
+  :init
+  (setq org-ref-completion-library 'org-ref-ivy-cite)
+  :config
+  (plist-put org-format-latex-options :scale 1.5))
+
+

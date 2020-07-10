@@ -19,10 +19,8 @@
   :require t
   :config
   (setq tramp-default-method "ssh")
-  (add-to-list 'tramp-default-proxies-alist
-	     '("163.239.88.120" nil "/ssh:kyurai@cspro9.sogang.ac.kr:")))
-
-
-
-
+  (let ((tramp-proxy-list-file (concat (file-name-as-directory "~/.emacs.d/local")
+				       "tramp_proxies.el")))
+    (when (file-exists-p tramp-proxy-list-file)
+      (load-file tramp-proxy-list-file))))
 
