@@ -51,9 +51,10 @@
   :ensure t
   :hook
   (c-mode-common-hook . rtags-start-process-unless-running)
-  ;;(setq rtags-autostart-diagnostics t)
   ;; (setq rtags-completions-enabled t)
-  ;;(setq rtags-path "../elpa/rtags-20200507.1824/rtags-2.38/bin")
+  :config
+  ;; (setq rtags-autostart-diagnostics t)
+  (setq rtags-path "/home/msca8h/.emacs.d/rtags/build/bin")
   (rtags-diagnostics))
 
 ;; flycheck rtags integration
@@ -104,6 +105,13 @@
   ;; ("C-;" . company-irony)
   :hook
   (c-mode-common-hook . irony-company-backend)
+  :config
+  (setq company-async-timeout 5))
+
+(leaf flycheck-irony
+  :ensure t
+  :hook
+  (c-mode-common-hook . flycheck-irony-setup)
   :config
   (setq company-async-timeout 5))
 
