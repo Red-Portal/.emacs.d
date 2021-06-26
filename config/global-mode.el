@@ -19,6 +19,12 @@
   :ensure t
   :require t)
 
+(leaf undo-tree
+  :ensure t
+  :require t
+  :config
+  (undo-tree-mode t))
+
 (leaf electric-pair-mod
   :config
   (electric-pair-mode t))
@@ -128,15 +134,15 @@
 
 (leaf solaire-mode
   :ensure t
-  :hook
-  (after-change-major-mode-hook . turn-on-solaire-mode)
-  (minibuffer-setup-hook . solaire-mode-in-minibuffer)
   :config
-  (setq solaire-mode-remap-modeline nil))
+  (solaire-global-mode +1))
 
 (leaf flycheck
   :require t
   :ensure t
+  :init
+  (setq-default flycheck-disabled-checkers '(c/c++-clang))
+  (setq-default flycheck-disabled-checkers '(c/c++-gcc))
   :config
   (global-flycheck-mode))
 
