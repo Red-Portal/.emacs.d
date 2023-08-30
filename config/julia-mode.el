@@ -1,6 +1,6 @@
 
-;; Red-Portal/.emacs.d Red-Portal's personal emacs settings. 
-;; Copyright (C) 2017 Red-Portal 
+;; Kyurae Kim's personal emacs settings. 
+;; Copyright (C) 2017-2023 Kyurae Kim
 ;;
 ;; This program is free software: you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -17,38 +17,20 @@
 ;; Red-Portal/.emacs.d Red-Portal's personal emacs settings. 
 ;; Copyright (C) 2017 Red-Portal 
 
-;; (quelpa '(lsp-julia :fetcher github :repo "non-Jedi/lsp-julia"))
-
-(add-hook 'julia-mode-hook 'fci-mode)
-;;(add-hook 'julia-mode-hook 'lsp-mode)
-;;(add-hook 'julia-mode-hook 'company-ess-julia-objects)
-
 (leaf julia-mode
   :ensure t)
 
 (leaf julia-shell
   :ensure t)
 
-(leaf flycheck-julia
-  :ensure t
-  :hook
-  (julia-mode-hook . flycheck-julia-setup))
-
-(leaf quelpa-use-package 
-  :ensure t
-  :require quelpa)
-
-(quelpa
- '(quelpa-use-package
-   :fetcher github
-   :repo "non-Jedi/lsp-julia"
-   :files (:defaults "languageserver")))
+;; (leaf flycheck-julia
+;;   :ensure t
+;;   :hook
+;;   (julia-mode-hook . flycheck-julia-setup))
 
 (leaf lsp-julia
   :require t
   :hook
   (julia-mode-hook . lsp-mode))
 
-;; (defun julia-company-backend()
-;;   (setq-local company-backends '((company-ess-julia-objects))))
 

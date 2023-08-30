@@ -1,6 +1,6 @@
 
-;; Red-Portal/.emacs.d Red-Portal's personal emacs settings. 
-;; Copyright (C) 2017 Red-Portal 
+;; Kyurae Kim's personal emacs settings. 
+;; Copyright (C) 2017-2023 Kyurae Kim
 ;;
 ;; This program is free software: you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -15,15 +15,12 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-(leaf quelpa
-  :ensure t
-  :require t)
-
 (leaf undo-tree
   :ensure t
   :require t
   :config
-  (undo-tree-mode t))
+  (global-undo-tree-mode)
+  (setq undo-tree-auto-save-history nil))
 
 (leaf electric-pair-mod
   :config
@@ -34,20 +31,17 @@
   :ensure t
   :config
   (ivy-mode 1)
-  (setq ivy-re-builders-alist
-      '((t . ivy--regex-fuzzy))))
-
-(leaf smex
-  :require t
-  :ensure t)
+  (setq ivy-use-virtual-buffers t)
+  (setq enable-recursive-minibuffers t)
+  )
 
 (leaf counsel
-  :require counsel smex
   :ensure t
   :bind
-  ("M-x" . counsel-M-x)
   :config
-  (setcdr (assoc 'counsel-M-x ivy-initial-inputs-alist) ""))
+  (counsel-mode 1)
+  (savehist-mode 1)
+  )
 
 ;; Line number
 (when (version<= "26.0.50" emacs-version )
@@ -57,6 +51,12 @@
   :ensure t
   :hook
   (lsp-mode-hook . lsp))
+
+(leaf lsp-ui
+  :require lsp-mode
+  :ensure t
+  :hook
+  (lsp-mode-hook . lsp-ui-mode))
 
 (leaf company
   :require t
@@ -81,44 +81,36 @@
   :ensure t
   :hook (company-mode-hook . company-box-mode))
 
-(leaf fill-column-indicator
-  :ensure t
-  :hook 
-  (company-completion-started-hook  . company-turn-off-fci)
-  (company-completion-finished-hook . company-maybe-turn-on-fci)
-  (company-completion-cancelled-hook . company-maybe-turn-on-fci)
-  :config
-  (setq fci-rule-column 80)
-  (defvar-local company-fci-mode-on-p nil)
-  (defun company-turn-off-fci (&rest ignore)
-    (setq company-fci-mode-on-p fci-mode)
-    (when fci-mode (fci-mode -1)))
-  (defun company-maybe-turn-on-fci (&rest ignore)
-    (when company-fci-mode-on-p (fci-mode 1))))
-
 (defun next-line-fast()
   (interactive)
   (next-line 5))
 
-(defun prvious-line-fast()
+(defun previous-line-fast()
   (interactive)
   (previous-line 5))
 
 (leaf evil
   :require evil windmove
   :ensure t
-  :bind
-  ((:evil-normal-state-map
-    ("J" . next-line-fast)
-    ("K" . prvious-line-fast))
-   (:evil-normal-state-map
-    ("C-h" . windmove-left)
-    ("C-j" . windmove-down)
-    ("C-k" . windmove-up)
-    ("C-l" . windmove-right)))
+  :init
+  (setq evil-want-keybinding nil)
   :config
   (evil-mode 1)
-  (turn-on-evil-mode))
+  (turn-on-evil-mode)
+  (evil-global-set-key 'normal (kbd "J"  ) 'next-line-fast)
+  (evil-global-set-key 'normal (kbd "K"  ) 'previous-line-fast)
+  (evil-global-set-key 'normal (kbd "C-h") 'windmove-left)
+  (evil-global-set-key 'normal (kbd "C-j") 'windmove-down)
+  (evil-global-set-key 'normal (kbd "C-k") 'windmove-up)
+  (evil-global-set-key 'normal (kbd "C-l") 'windmove-right)
+  )
+
+(leaf evil-collection
+  :require evil 
+  :ensure t
+  :config
+  (evil-collection-init)
+  )
 
 (evil-mode 1)
 (turn-on-evil-mode)
@@ -140,15 +132,12 @@
 (leaf flycheck
   :require t
   :ensure t
-  :init
-  (setq-default flycheck-disabled-checkers '(c/c++-clang))
-  (setq-default flycheck-disabled-checkers '(c/c++-gcc))
   :config
   (global-flycheck-mode))
 
 (leaf doom-modeline
   :ensure t
-  :require all-the-icons ;; require M-x all-the-icons-install-fonts
+  :require nerd-icons
   :init
   (setq doom-modeline-height 30)
   (setq doom-modeline-enable-word-count t)
@@ -161,26 +150,11 @@
 (when (fboundp 'windmove-default-keybindings)
   (windmove-default-keybindings))
 
-;; aggressive-indent-mode
-(leaf aggressive-indent
-  :ensure t
-  :init
-  ;; (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
-  ;; (add-hook 'c-mode-common-hook #'aggressive-indent-mode)
-  ;;:config
-  ;; currently experimentally using global mode enabled
-  ;;(global-aggressive-indent-mode 1))
-  )
-
 (leaf magit
   :require t
   :ensure t
   :bind
   ("C-x g" . magit-status))
-
-(leaf evil-magit
-  :ensure t
-  :require evil-magit)
 
 (global-hl-line-mode t)
 
@@ -203,23 +177,6 @@
       scroll-down-aggressively 0.5
       mouse-wheel-scroll-amount '(3 ((shift). 1))
       mouse-wheel-progressive-speed nil)
-
-(defun lsp-company-backend()
-  (add-to-list 'company-backends 'company-lsp))
-
-(leaf company-lsp
-  :ensure t
-  :init
-  (setq lsp-auto-configure t)
-  :require lsp-mode)
-
-;; indent guide mode
-;; (use-package highlight-indent-guides
-;;   :ensure t
-;;   :init
-;;   (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
-;;   :config
-;;   (setq highlight-indent-guides-method 'character)) 
 
 ;; truncate lines
 (set-default 'truncate-lines t)
@@ -266,7 +223,7 @@
   :bind
   ((:evil-normal-state-map
     ("J" . next-line-fast)
-    ("K" . prvious-line-fast))
+    ("K" . previous-line-fast))
    (:evil-normal-state-map
     ("C-h" . windmove-left)
     ("C-j" . windmove-down)
@@ -275,5 +232,11 @@
   :config
   (evil-mode 1)
   (turn-on-evil-mode))
+
+(use-package evil-collection
+  :after evil
+  :ensure t
+  :config
+  (evil-collection-init))
 
 (global-set-key (kbd "S-SPC") 'toggle-input-method)

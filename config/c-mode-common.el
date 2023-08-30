@@ -1,6 +1,6 @@
 
-;; Red-Portal/.emacs.d Red-Portal's personal emacs settings. 
-;; Copyright (C) 2017 Red-Portal 
+;; Kyurae Kim's personal emacs settings. 
+;; Copyright (C) 2017-2023 Kyurae Kim
 ;;
 ;; This program is free software: you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -20,12 +20,6 @@
   :mode("CMakeLists.txt'" . cmake-mode)
   :init
   (setq cmake-tab-width 4))
-
-;;(use-package electric-spacing
-;; :init
-;; (add-hook 'c-mode-common-hook #'electric-spacing-mode))
-
-;;(add-hook 'c-mode-common-hook #'electric-pair-mode)
 
 (setq c-default-style "bsd"
       tab-width 8

@@ -1,6 +1,6 @@
 
-;; Red-Portal/.emacs.d Red-Portal's personal emacs settings. 
-;; Copyright (C) 2020 Red-Portal 
+;; Kyurea Kim's personal emacs settings. 
+;; Copyright (C) 2020-2023 Kyurea Kim
 ;;
 ;; This program is free software: you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
