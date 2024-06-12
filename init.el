@@ -49,13 +49,14 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(el-get-git-shallow-clone t t)
+ '(helm-minibuffer-history-key "M-p")
  '(package-archives
    '(("melpa stable" . "https://stable.melpa.org/packages/")
      ("gnu" . "https://elpa.gnu.org/packages/")
      ("org" . "https://orgmode.org/elpa/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(lsp-ui company-box company all-the-icons org-ref org-ql feather company-lsp lsp-julia lsp-mode electric-pair-mod electric-pair clang-format doom-modeline telephone-line el-get hydra leaf-keywords counsel leaf stan-mode ivy-bibtex latex-preview-pane evil-multiedit htmlize ess-site julia-shell julia-mode nlinum-hl smooth-scroll highlight-parentheses highlight-indent-guides yaml-mode ein company-rtags cuda-mode highlight-symbol solaire-mode ox-gfm smartparens function-args evil-magit magit aggressive-indent markdown-mode srefactor flycheck-rtags irony-mode electric-pair-mode cmake-mode flycheck-irony flycheck spacemacs-theme cmake-ide irony doom-themes rainbow-delimiters evil ivy)))
+   '(nerd-icons lsp-ui company-box company all-the-icons org-ref org-ql feather company-lsp lsp-julia lsp-mode electric-pair-mod electric-pair clang-format doom-modeline telephone-line el-get hydra leaf-keywords counsel leaf stan-mode ivy-bibtex latex-preview-pane evil-multiedit htmlize ess-site julia-shell julia-mode nlinum-hl smooth-scroll highlight-parentheses highlight-indent-guides yaml-mode ein company-rtags cuda-mode highlight-symbol solaire-mode ox-gfm smartparens function-args evil-magit magit aggressive-indent markdown-mode srefactor flycheck-rtags irony-mode electric-pair-mode cmake-mode flycheck-irony flycheck spacemacs-theme cmake-ide irony doom-themes rainbow-delimiters evil ivy)))
 (put 'upcase-region 'disabled nil)
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
