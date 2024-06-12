@@ -32,5 +32,17 @@
   :require t
   :hook
   (julia-mode-hook . lsp-mode))
+  
+(load-file "~/.emacs.d/elpa/julia-formatter-20231130.1512/julia-formatter.el")
 
+
+(require 'use-package)
+(use-package julia-formatter
+  :straight (julia-formatter :type git :host codeberg :repo "FelipeLema/julia-formatter.el"
+                             :files ("julia-formatter.el"
+                                     "toml-respects-json.el"
+                                     "formatter_service.jl"
+                                     "Manifest.toml" "Project.toml"))
+  :hook
+  (julia-mode-hook . julia-formatter-mode))
 
