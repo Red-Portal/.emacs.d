@@ -105,6 +105,7 @@
   (evil-global-set-key 'normal (kbd "C-j") 'windmove-down)
   (evil-global-set-key 'normal (kbd "C-k") 'windmove-up)
   (evil-global-set-key 'normal (kbd "C-l") 'windmove-right)
+  (evil-global-set-key 'normal (kbd "M-x") 'counsel-M-x)
   )
 
 (leaf evil-collection
