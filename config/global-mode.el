@@ -15,6 +15,8 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+(setq-default indent-tabs-mode nil)
+
 (leaf undo-tree
   :ensure t
   :require t
@@ -103,6 +105,7 @@
   (evil-global-set-key 'normal (kbd "C-j") 'windmove-down)
   (evil-global-set-key 'normal (kbd "C-k") 'windmove-up)
   (evil-global-set-key 'normal (kbd "C-l") 'windmove-right)
+  (evil-global-set-key 'normal (kbd "M-x") 'counsel-M-x)
   )
 
 (leaf evil-collection
