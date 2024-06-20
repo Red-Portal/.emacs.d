@@ -240,3 +240,6 @@
   (evil-collection-init))
 
 (global-set-key (kbd "S-SPC") 'toggle-input-method)
+
+(setq dired-listing-switches "-aBhl  --group-directories-first")
+
