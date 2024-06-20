@@ -32,9 +32,6 @@
   :require t
   :hook
   (julia-mode-hook . lsp-mode))
-  
-(load-file "~/.emacs.d/elpa/julia-formatter-20231130.1512/julia-formatter.el")
-
 
 (require 'use-package)
 (use-package julia-formatter
