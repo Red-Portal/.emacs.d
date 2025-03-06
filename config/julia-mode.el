@@ -34,7 +34,9 @@
   (julia-mode-hook . lsp-mode))
 
 (require 'use-package)
+
 (use-package julia-formatter
+  :ensure t
   :straight (julia-formatter :type git :host codeberg :repo "FelipeLema/julia-formatter.el"
                              :files ("julia-formatter.el"
                                      "toml-respects-json.el"

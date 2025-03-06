@@ -35,15 +35,3 @@
   :ensure t
   )
 
-(leaf org-ref
-  :require t
-  :ensure t
-  :hook
-  (org-mode-hook . (lambda () (setq org-ref-default-bibliography '("references.bib"))))
-  (org-mode-hook . (lambda () (setq reftex-default-bibliography '("references.bib"))))
-  :init
-  (setq org-ref-completion-library 'org-ref-ivy-cite)
-  :config
-  (plist-put org-format-latex-options :scale 1.5))
-
-
