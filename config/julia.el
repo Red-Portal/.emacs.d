@@ -15,6 +15,27 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ;; Red-Portal/.emacs.d Red-Portal's personal emacs settings. 
+;; Copyright (C) 2017 Red-Portal 
 
-;; adding various c++ extensions to list
-;; (add-to-list 'auto-mode-alist '("\\.c\\'" . c-mode))
+(use-package lsp-julia
+  :ensure t
+  )
+
+(use-package julia-mode
+  :ensure t
+  :mode "\\.jl\\'"
+  )
+
+
+;; (require 'use-package)
+
+;; (use-package julia-formatter
+;;   :ensure t
+;;   :straight (julia-formatter :type git :host codeberg :repo "FelipeLema/julia-formatter.el"
+;;                              :files ("julia-formatter.el"
+;;                                      "toml-respects-json.el"
+;;                                      "formatter_service.jl"
+;;                                      "Manifest.toml" "Project.toml"))
+;;   :hook
+;;   (julia-mode-hook . julia-formatter-mode))
+

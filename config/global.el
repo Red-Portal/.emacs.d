@@ -1,6 +1,6 @@
 
 ;; Kyurae Kim's personal emacs settings. 
-;; Copyright (C) 2017-2023 Kyurae Kim
+;; Copyright (C) 2017-2025 Kyurae Kim
 ;;
 ;; This program is free software: you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -14,6 +14,8 @@
 ;;
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+(global-font-lock-mode 1)
 
 (setq-default indent-tabs-mode nil)
 
@@ -49,16 +51,6 @@
 (when (version<= "26.0.50" emacs-version )
   (global-display-line-numbers-mode))
 
-(leaf lsp-mode
-  :ensure t
-  :hook
-  (lsp-mode-hook . lsp))
-
-(leaf lsp-ui
-  :require lsp-mode
-  :ensure t
-  :hook
-  (lsp-mode-hook . lsp-ui-mode))
 
 (leaf company
   :require t
@@ -114,9 +106,6 @@
   :config
   (evil-collection-init)
   )
-
-(evil-mode 1)
-(turn-on-evil-mode)
 
 (leaf doom-themes
   :ensure t
@@ -182,8 +171,7 @@
       mouse-wheel-progressive-speed nil)
 
 ;; truncate lines
-(set-default 'truncate-lines t)
-(add-hook 'compilation-mode-hook '(lambda ()(toggle-truncate-lines)))
+(set-default 'truncate-lines nil)
 
 ;; matching parenthese highlight mode
 ;; (leaf highlight-parentheses
@@ -220,18 +208,16 @@
 ;;    ("C-n" . evil-multiedit-next)
 ;;    ("C-p" . evil-multiedit-prev)))
 
-(leaf evil
-  :require evil windmove
+(use-package evil
   :ensure t
   :bind
-  ((:evil-normal-state-map
+  (:map evil-normal-state-map
     ("J" . next-line-fast)
-    ("K" . previous-line-fast))
-   (:evil-normal-state-map
+    ("K" . previous-line-fast)
     ("C-h" . windmove-left)
     ("C-j" . windmove-down)
     ("C-k" . windmove-up)
-    ("C-l" . windmove-right)))
+    ("C-l" . windmove-right))
   :config
   (evil-mode 1)
   (turn-on-evil-mode))
