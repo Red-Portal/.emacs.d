@@ -41,6 +41,12 @@
   (savehist-mode 1)
   )
 
+;; this must be loaded after counsel
+(use-package ivy-prescient
+  :ensure t
+  :config
+  (ivy-prescient-mode 1))
+
 ;; Line number
 (when (version<= "26.0.50" emacs-version )
   (global-display-line-numbers-mode))
