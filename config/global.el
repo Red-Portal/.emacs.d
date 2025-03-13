@@ -19,19 +19,13 @@
 
 (setq-default indent-tabs-mode nil)
 
-(leaf undo-tree
+(use-package undo-tree
   :ensure t
-  :require t
   :config
   (global-undo-tree-mode)
   (setq undo-tree-auto-save-history nil))
 
-(leaf electric-pair-mod
-  :config
-  (electric-pair-mode t))
-
-(leaf ivy
-  :require t
+(use-package ivy
   :ensure t
   :config
   (ivy-mode 1)
@@ -39,7 +33,7 @@
   (setq enable-recursive-minibuffers t)
   )
 
-(leaf counsel
+(use-package counsel
   :ensure t
   :bind
   :config
@@ -51,9 +45,7 @@
 (when (version<= "26.0.50" emacs-version )
   (global-display-line-numbers-mode))
 
-
-(leaf company
-  :require t
+(use-package company
   :ensure t
   :bind
   ("S-RET" . company-complete)
@@ -71,43 +63,11 @@
   (setq company-dabbrev-downcase 0)
   (setq company-idle-delay 0.1))
 
-(leaf company-box
+(use-package company-box
   :ensure t
   :hook (company-mode-hook . company-box-mode))
 
-(defun next-line-fast()
-  (interactive)
-  (next-line 5))
-
-(defun previous-line-fast()
-  (interactive)
-  (previous-line 5))
-
-(leaf evil
-  :require evil windmove
-  :ensure t
-  :init
-  (setq evil-want-keybinding nil)
-  :config
-  (evil-mode 1)
-  (turn-on-evil-mode)
-  (evil-global-set-key 'normal (kbd "J"  ) 'next-line-fast)
-  (evil-global-set-key 'normal (kbd "K"  ) 'previous-line-fast)
-  (evil-global-set-key 'normal (kbd "C-h") 'windmove-left)
-  (evil-global-set-key 'normal (kbd "C-j") 'windmove-down)
-  (evil-global-set-key 'normal (kbd "C-k") 'windmove-up)
-  (evil-global-set-key 'normal (kbd "C-l") 'windmove-right)
-  (evil-global-set-key 'normal (kbd "M-x") 'counsel-M-x)
-  )
-
-(leaf evil-collection
-  :require evil 
-  :ensure t
-  :config
-  (evil-collection-init)
-  )
-
-(leaf doom-themes
+(use-package doom-themes
   :ensure t
   :config
   (setq doom-themes-enable-bold t
@@ -116,20 +76,18 @@
   (load-theme 'doom-one t)
   (doom-themes-visual-bell-config))
 
-(leaf solaire-mode
+(use-package solaire-mode
   :ensure t
   :config
   (solaire-global-mode +1))
 
-(leaf flycheck
-  :require t
+(use-package flycheck
   :ensure t
   :config
   (global-flycheck-mode))
 
-(leaf doom-modeline
+(use-package doom-modeline
   :ensure t
-  :require nerd-icons
   :init
   (setq doom-modeline-height 30)
   (setq doom-modeline-enable-word-count t)
@@ -142,8 +100,7 @@
 (when (fboundp 'windmove-default-keybindings)
   (windmove-default-keybindings))
 
-(leaf magit
-  :require t
+(use-package magit
   :ensure t
   :bind
   ("C-x g" . magit-status))
@@ -172,61 +129,6 @@
 
 ;; truncate lines
 (set-default 'truncate-lines nil)
-
-;; matching parenthese highlight mode
-;; (leaf highlight-parentheses
-;;   :ensure t
-;;   :hook
-;;   (lisp-mode-hook . highlight-parentheses-mode)
-;;   (prog-mode-hook . highlight-parentheses-mode))
-
-(leaf evil-multiedit
-  :require t
-  :ensure t
-  :config
-  (evil-multiedit-default-keybinds))
-
-;;;;;;;;;;;;;; Cheatsheet ;;;;;;;;;;;;;;
-;; ((:evil-visual-state-map
-;;    ("R" . evil-multiedit-match-all)
-;;    ("C-M-D" . evil-multiedit-restore)
-;;    ("M-d" . evil-multiedit-and-next)
-;;    ("M-D" . evil-multiedit-and-prev))
-;;   (:evil-normal-state-map
-;;    ("M-d" . evil-multiedit-match-and-next)
-;;    ("M-D" . evil-multiedit-match-and-prev))
-;;   (:evil-insert-state-map
-;;    ("M-d" . evil-multiedit-toggle-marker-here))
-;;   (:evil-multiedit-state-map
-;;    ("RET" . evil-multiedit-toggle-or-restrict-region))
-;;   (:evil-motion-state-map
-;;    ("RET" . evil-multiedit-toggle-or-restrict-region))
-;;   (:evil-multiedit-state-map
-;;    ("C-n" . evil-multiedit-next)
-;;    ("C-p" . evil-multiedit-prev))
-;;   (:evil-multiedit-insert-state-map
-;;    ("C-n" . evil-multiedit-next)
-;;    ("C-p" . evil-multiedit-prev)))
-
-(use-package evil
-  :ensure t
-  :bind
-  (:map evil-normal-state-map
-    ("J" . next-line-fast)
-    ("K" . previous-line-fast)
-    ("C-h" . windmove-left)
-    ("C-j" . windmove-down)
-    ("C-k" . windmove-up)
-    ("C-l" . windmove-right))
-  :config
-  (evil-mode 1)
-  (turn-on-evil-mode))
-
-(use-package evil-collection
-  :after evil
-  :ensure t
-  :config
-  (evil-collection-init))
 
 (global-set-key (kbd "S-SPC") 'toggle-input-method)
 

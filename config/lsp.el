@@ -4,8 +4,7 @@
   :hook
   (julia-mode . lsp))
 
-(leaf lsp-ui
-  :require lsp-mode
+(use-package lsp-ui
   :ensure t
   :hook
   (lsp-mode-hook . lsp-ui-mode))

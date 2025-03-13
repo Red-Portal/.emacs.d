@@ -20,7 +20,7 @@
 (defun dont-truncate-lines ()
     (setq-local truncate-lines nil))
 
-(leaf ivy-bibtex
+(use-package ivy-bibtex
   :ensure t
   :hook
   ;;((LaTeX-mode-hook latex-mode-hook) . set-local-bibtex-database-file)
@@ -33,7 +33,7 @@
 (defun preview-pane-prompt ()
   (setq-local latex-preview-pane-multifile-mode 'prompt))
 
-(leaf latex-preview-pane 
+(use-package latex-preview-pane 
   :ensure t
   :hook
   ((LaTeX-mode-hook latex-mode-hook) . preview-pane-prompt)

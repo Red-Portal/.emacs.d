@@ -15,7 +15,7 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-(leaf smartparens
+(use-package smartparens
   :ensure t
   :hook
   (elisp-mode-hook . smartparens-mode)
@@ -23,7 +23,7 @@
   :config
   (sp-pair "'" nil :actions :rem))
 
-(leaf rainbow-delimiters
+(use-package rainbow-delimiters
    :ensure t
    :hook
    (prog-mode-hook . rainbow-delimiters-mode))

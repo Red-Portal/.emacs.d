@@ -26,12 +26,12 @@
 ;; external dependencies
 ;;   - jedi
 ;;   - virtualenv
-(leaf company-jedi
+(use-package company-jedi
   :ensure t
   :hook
   (python-mode-hook . jedi-backend)
   (python-mode-hook . jedi-mode))
 ;; (jedi:install-server)
 
-(leaf ein
+(use-package ein
   :ensure t)

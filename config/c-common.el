@@ -35,7 +35,7 @@
 (add-to-list 'auto-mode-alist '("\\.txx\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.inl\\'" . c++-mode))
 
-(leaf srefactor
+(use-package srefactor
   :ensure t
   :config
   (semantic-mode 1))
