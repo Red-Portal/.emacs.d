@@ -29,7 +29,7 @@ are supposed to be partially supported.
 
 ```
 Kyurae Kim's personal emacs settings. 
-Copyright (C) 2017-2023 Kyurae Kim 
+Copyright (C) 2017-2025 Kyurae Kim 
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
