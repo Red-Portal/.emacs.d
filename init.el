@@ -1,6 +1,6 @@
 
 ;; Kyurae Kim's personal emacs settings. 
-;; Copyright (C) 2017-2023 Kyurae Kim
+;; Copyright (C) 2017-2026 Kyurae Kim
 ;;
 ;; This program is free software: you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -31,26 +31,7 @@
 			  ("org"          . "https://orgmode.org/elpa/")
 			  ("melpa"        . "https://melpa.org/packages/")))
   (package-initialize)
-  (unless (package-installed-p 'leaf)
-    (package-refresh-contents)
-    (package-install 'leaf))
   )
-
-(defvar bootstrap-version)
-(let ((bootstrap-file
-       (expand-file-name
-        "straight/repos/straight.el/bootstrap.el"
-        (or (bound-and-true-p straight-base-dir)
-            user-emacs-directory)))
-      (bootstrap-version 7))
-  (unless (file-exists-p bootstrap-file)
-    (with-current-buffer
-        (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
-         'silent 'inhibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
 
 
 (defun load-directory (dir)
@@ -72,7 +53,7 @@
      ("org" . "https://orgmode.org/elpa/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(julia-formatter nerd-icons lsp-ui company-box company all-the-icons org-ref org-ql feather company-lsp lsp-julia lsp-mode electric-pair-mod electric-pair clang-format doom-modeline telephone-line el-get hydra leaf-keywords counsel leaf stan-mode ivy-bibtex latex-preview-pane evil-multiedit htmlize ess-site julia-shell julia-mode nlinum-hl smooth-scroll highlight-parentheses highlight-indent-guides yaml-mode ein company-rtags cuda-mode highlight-symbol solaire-mode ox-gfm smartparens function-args evil-magit magit aggressive-indent markdown-mode srefactor flycheck-rtags irony-mode electric-pair-mode cmake-mode flycheck-irony flycheck spacemacs-theme cmake-ide irony doom-themes rainbow-delimiters evil ivy)))
+   '(julia-formatter nerd-icons lsp-ui company-box company all-the-icons org-ref org-ql feather company-lsp lsp-julia lsp-mode electric-pair-mod electric-pair clang-format doom-modeline telephone-line el-get hydra leaf-keywords counsel stan-mode ivy-bibtex latex-preview-pane evil-multiedit htmlize ess-site julia-shell julia-mode nlinum-hl smooth-scroll highlight-parentheses highlight-indent-guides yaml-mode ein company-rtags cuda-mode highlight-symbol solaire-mode ox-gfm smartparens function-args evil-magit magit aggressive-indent markdown-mode srefactor flycheck-rtags irony-mode electric-pair-mode cmake-mode flycheck-irony flycheck spacemacs-theme cmake-ide irony doom-themes rainbow-delimiters evil ivy)))
 (put 'upcase-region 'disabled nil)
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
