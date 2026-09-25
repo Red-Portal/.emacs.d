@@ -1,6 +1,6 @@
-
+;; -*- lexical-binding: t; -*-
 ;; Kyurae Kim's personal emacs settings. 
-;; Copyright (C) 2017-2023 Kyurae Kim
+;; Copyright (C) 2017-2026 Kyurae Kim
 ;;
 ;; This program is free software: you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -15,23 +15,14 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-(add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
-(add-hook 'python-mode-hook 'fci-mode)
+(use-package python-mode
+  :ensure nil
+  :mode "\\.py\\'"
+  )
 
 (setq python-indent-offset 4)
 
-(defun jedi-company-backend ()
-  (add-to-list 'company-backends 'company-jedi))
-
-;; external dependencies
-;;   - jedi
-;;   - virtualenv
-(use-package company-jedi
+(use-package pyenv-mode
   :ensure t
-  :hook
-  (python-mode-hook . jedi-backend)
-  (python-mode-hook . jedi-mode))
-;; (jedi:install-server)
-
-(use-package ein
-  :ensure t)
+  :config
+  (pyenv-mode 1))
